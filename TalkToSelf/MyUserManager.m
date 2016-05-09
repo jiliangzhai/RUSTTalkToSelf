@@ -162,6 +162,7 @@
 {
     [[[MyUserManager userDic] objectForKey:@"targetNames"] removeObjectAtIndex:index];
     [[[MyUserManager userDic] objectForKey:@"targetNames"] insertObject:newName atIndex:index];
+    [MyUserManager save];
 }
 
 + (NSData *)userThumbnail

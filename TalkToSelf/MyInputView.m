@@ -278,14 +278,14 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
     UIImage* image = [info objectForKey:UIImagePickerControllerEditedImage];
-    [self.superController dismissViewControllerAnimated:picker completion:^{
+    [self.superController dismissViewControllerAnimated:YES completion:^{
         [self.delegate sendPicMessage:image];
     }];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
-    [self.superController dismissViewControllerAnimated:picker completion:nil];
+    [self.superController dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)dealloc

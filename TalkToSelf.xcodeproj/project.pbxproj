@@ -142,8 +142,6 @@
 		DE48FC5E1C575E1900ACFE98 /* MyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTableViewCell.m; sourceTree = "<group>"; };
 		DE49C8C61CABA0910025FFCA /* MyTargetEditorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTargetEditorController.h; sourceTree = "<group>"; };
 		DE49C8C71CABA0910025FFCA /* MyTargetEditorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTargetEditorController.m; sourceTree = "<group>"; };
-		DE4C397E1CCA02D600020EC4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
-		DE4C397F1CCA02D600020EC4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		DE4D15421C5897F700388DA7 /* MyAVAudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAVAudioPlayer.h; sourceTree = "<group>"; };
 		DE4D15431C5897F700388DA7 /* MyAVAudioPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAVAudioPlayer.m; sourceTree = "<group>"; };
 		DE4F39241C92AA000064D610 /* MyUserInformationEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyUserInformationEditor.h; sourceTree = "<group>"; };
@@ -204,6 +202,7 @@
 		DE6128451C817D6A00D76941 /* chatto_bg_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chatto_bg_normal.png; sourceTree = "<group>"; };
 		DE62162B1C856D1500DBCE2A /* MyDataSourcemanager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyDataSourcemanager.h; sourceTree = "<group>"; };
 		DE62162C1C856D1500DBCE2A /* MyDataSourcemanager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyDataSourcemanager.m; sourceTree = "<group>"; };
+		DE645FE61CE0C6E300FD3262 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		DE77ADDE1CA3BF9800283660 /* MySecretManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySecretManager.h; sourceTree = "<group>"; };
 		DE77ADDF1CA3BF9800283660 /* MySecretManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySecretManager.m; sourceTree = "<group>"; };
 		DE77ADE11CA3BFAD00283660 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -801,7 +800,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				DE265DEB1C565C0E000DDF58 /* Base */,
-				DE4C397E1CCA02D600020EC4 /* zh-Hans */,
+				DE645FE61CE0C6E300FD3262 /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -810,7 +809,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				DE265DF01C565C0E000DDF58 /* Base */,
-				DE4C397F1CCA02D600020EC4 /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -902,6 +900,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = YES;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = TalkToSelf/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -920,6 +919,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = YES;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = TalkToSelf/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

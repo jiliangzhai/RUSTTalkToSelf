@@ -166,7 +166,7 @@
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CbN-fY-jSf">
                                                     <rect key="frame" x="24" y="8" width="343" height="27.5"/>
-                                                    <state key="normal" title="隐私设置">
+                                                    <state key="normal" title="密码服务">
                                                         <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
                                                     <connections>
@@ -1019,9 +1019,9 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bLk-1J-epK">
-                                                    <rect key="frame" x="0.0" y="-1" width="375" height="36.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                                     <color key="backgroundColor" red="0.40245934370000003" green="1" blue="0.3052265025" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <state key="normal" title="申请找回">
+                                                    <state key="normal" title="密码找回">
                                                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
                                                     <connections>
@@ -1030,8 +1030,8 @@
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="bLk-1J-epK" firstAttribute="bottom" secondItem="EnY-TQ-OGe" secondAttribute="bottomMargin" id="C7I-fJ-Jzo"/>
-                                                <constraint firstItem="bLk-1J-epK" firstAttribute="top" secondItem="EnY-TQ-OGe" secondAttribute="topMargin" constant="-9" id="Y7f-wP-imq"/>
+                                                <constraint firstItem="bLk-1J-epK" firstAttribute="bottom" secondItem="EnY-TQ-OGe" secondAttribute="bottomMargin" constant="8" id="C7I-fJ-Jzo"/>
+                                                <constraint firstItem="bLk-1J-epK" firstAttribute="top" secondItem="EnY-TQ-OGe" secondAttribute="topMargin" constant="-8" id="Y7f-wP-imq"/>
                                                 <constraint firstItem="bLk-1J-epK" firstAttribute="trailing" secondItem="EnY-TQ-OGe" secondAttribute="trailingMargin" constant="8" id="l6f-LO-KER"/>
                                                 <constraint firstItem="bLk-1J-epK" firstAttribute="leading" secondItem="EnY-TQ-OGe" secondAttribute="leadingMargin" constant="-8" id="nlP-xA-WjI"/>
                                             </constraints>
