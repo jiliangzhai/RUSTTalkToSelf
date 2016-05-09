@@ -10,7 +10,6 @@
 		DE265DE31C565C0E000DDF58 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DE265DE21C565C0E000DDF58 /* main.m */; };
 		DE265DE61C565C0E000DDF58 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DE265DE51C565C0E000DDF58 /* AppDelegate.m */; };
 		DE265DE91C565C0E000DDF58 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE265DE81C565C0E000DDF58 /* ViewController.m */; };
-		DE265DEC1C565C0E000DDF58 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE265DEA1C565C0E000DDF58 /* Main.storyboard */; };
 		DE265DEE1C565C0E000DDF58 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE265DED1C565C0E000DDF58 /* Assets.xcassets */; };
 		DE265DF11C565C0E000DDF58 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE265DEF1C565C0E000DDF58 /* LaunchScreen.storyboard */; };
 		DE265DFC1C565C0E000DDF58 /* TalkToSelfTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DE265DFB1C565C0E000DDF58 /* TalkToSelfTests.m */; };
@@ -66,6 +65,7 @@
 		DE6128531C817D6A00D76941 /* chatfrom_bg_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = DE6128431C817D6A00D76941 /* chatfrom_bg_normal.png */; };
 		DE6128551C817D6A00D76941 /* chatto_bg_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = DE6128451C817D6A00D76941 /* chatto_bg_normal.png */; };
 		DE62162D1C856D1500DBCE2A /* MyDataSourcemanager.m in Sources */ = {isa = PBXBuildFile; fileRef = DE62162C1C856D1500DBCE2A /* MyDataSourcemanager.m */; };
+		DE645FE71CE0CBDE00FD3262 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE265DEA1C565C0E000DDF58 /* Main.storyboard */; };
 		DE77ADE01CA3BF9800283660 /* MySecretManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DE77ADDF1CA3BF9800283660 /* MySecretManager.m */; };
 		DE77ADE21CA3BFAD00283660 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE77ADE11CA3BFAD00283660 /* Security.framework */; };
 		DE77ADE51CA3C0BA00283660 /* MyKeyChainService.m in Sources */ = {isa = PBXBuildFile; fileRef = DE77ADE41CA3C0BA00283660 /* MyKeyChainService.m */; };
@@ -316,14 +316,10 @@
 			children = (
 				DE4F96B31C895B8700C6C640 /* fmdb */,
 				DE5AE3431C7D5708009642AF /* photo */,
-				DE55B5041C5C4DFE00742895 /* libmp3lame.a */,
-				DE4F96CB1C89601C00C6C640 /* libsqlite3.dylib */,
 				DE77ADE11CA3BFAD00283660 /* Security.framework */,
-				DE55B5051C5C4DFE00742895 /* Mp3Recorder.h */,
-				DE55B5061C5C4DFE00742895 /* Mp3Recorder.m */,
+				DE4F96CB1C89601C00C6C640 /* libsqlite3.dylib */,
 				DE265E1E1C56659B000DDF58 /* NSDate+Utils.h */,
 				DE265E1F1C56659B000DDF58 /* NSDate+Utils.m */,
-				DE59447E1CDB28E5007E1B53 /* lame.h */,
 				DE265DE21C565C0E000DDF58 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -495,6 +491,7 @@
 		DE5AE3431C7D5708009642AF /* photo */ = {
 			isa = PBXGroup;
 			children = (
+				DE645FE81CE0CCF700FD3262 /* VoiceLib */,
 				DE59447F1CDB2909007E1B53 /* thumbnails */,
 				DE47DFBC1CC0C9F5004147A4 /* spreadButton */,
 				DE6128361C817D6A00D76941 /* pic */,
@@ -525,6 +522,17 @@
 				DE5AE34C1C7D7AFD009642AF /* clockPanelNew.png */,
 			);
 			path = pic;
+			sourceTree = "<group>";
+		};
+		DE645FE81CE0CCF700FD3262 /* VoiceLib */ = {
+			isa = PBXGroup;
+			children = (
+				DE55B5041C5C4DFE00742895 /* libmp3lame.a */,
+				DE55B5051C5C4DFE00742895 /* Mp3Recorder.h */,
+				DE55B5061C5C4DFE00742895 /* Mp3Recorder.m */,
+				DE59447E1CDB28E5007E1B53 /* lame.h */,
+			);
+			name = VoiceLib;
 			sourceTree = "<group>";
 		};
 		DEC1A9EA1CA4DFF30062B6AD /* screenLock */ = {
@@ -663,6 +671,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE645FE71CE0CBDE00FD3262 /* Main.storyboard in Resources */,
 				DE5AE3471C7D5720009642AF /* fafan.jpg in Resources */,
 				DE5AE34D1C7D7AFD009642AF /* clockPanelNew.png in Resources */,
 				DE265DF11C565C0E000DDF58 /* LaunchScreen.storyboard in Resources */,
@@ -681,7 +690,6 @@
 				DE6128521C817D6A00D76941 /* chat_voice_record.png in Resources */,
 				DE6128481C817D6A00D76941 /* chat_animation2.png in Resources */,
 				DE265DEE1C565C0E000DDF58 /* Assets.xcassets in Resources */,
-				DE265DEC1C565C0E000DDF58 /* Main.storyboard in Resources */,
 				DE6128471C817D6A00D76941 /* chat_animation1.png in Resources */,
 				DE61284E1C817D6A00D76941 /* chat_message_back.png in Resources */,
 				DE50D5851CB3933100372BD3 /* MyCollectionViewCell.xib in Resources */,
@@ -852,7 +860,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -889,7 +897,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -992,7 +1000,7 @@
 				DE265E0A1C565C0E000DDF58 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		DE265E0B1C565C0E000DDF58 /* Build configuration list for PBXNativeTarget "TalkToSelf" */ = {
 			isa = XCConfigurationList;
@@ -1001,7 +1009,7 @@
 				DE265E0D1C565C0E000DDF58 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		DE265E0E1C565C0E000DDF58 /* Build configuration list for PBXNativeTarget "TalkToSelfTests" */ = {
 			isa = XCConfigurationList;
@@ -1010,7 +1018,7 @@
 				DE265E101C565C0E000DDF58 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		DE265E111C565C0E000DDF58 /* Build configuration list for PBXNativeTarget "TalkToSelfUITests" */ = {
 			isa = XCConfigurationList;
@@ -1019,7 +1027,7 @@
 				DE265E131C565C0E000DDF58 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};
