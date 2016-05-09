@@ -136,7 +136,8 @@
         [_delegate beginConvert];
     }
     @try {
-        int read, write;
+        long read;
+        long write;
         
         FILE *pcm = fopen([cafFilePath cStringUsingEncoding:1], "rb");  //source 被转换的音频文件位置
         fseek(pcm, 4*1024, SEEK_CUR);                                   //skip file header
@@ -157,7 +158,7 @@
             if (read == 0)
                 write = lame_encode_flush(lame, mp3_buffer, MP3_SIZE);
             else
-                write = lame_encode_buffer_interleaved(lame, pcm_buffer, read, mp3_buffer, MP3_SIZE);
+                write = lame_encode_buffer_interleaved(lame, pcm_buffer, (int)read, mp3_buffer, MP3_SIZE);
             
             fwrite(mp3_buffer, write, 1, mp3);
             
