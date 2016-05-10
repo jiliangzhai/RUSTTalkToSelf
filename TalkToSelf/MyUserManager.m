@@ -222,13 +222,14 @@
 {
     UIImage *image = thumbnail;
     if (!image) {
-        image = [UIImage imageNamed:@"0.jpg"];
+        image = [UIImage imageNamed:@"targetDefault.png"];
     }
     NSData *data = UIImagePNGRepresentation(image);
     [[[MyUserManager userDic] objectForKey:@"targetNames"] addObject:name];
     [[[MyUserManager userDic] objectForKey:@"targetThumbnails"] addObject:data];
     NSMutableArray *targetNames = [[MyUserManager userDic] objectForKey:@"targetNames"];
     NSNumber *num = [NSNumber numberWithInteger:targetNames.count-1];
+    NSLog(@"%@",num);
     [[MyUserManager userDic] setObject:num forKey:@"lastTargetIndex"];
     NSMutableArray *kissNum = [[MyUserManager userDic] objectForKey:@"kissNum"];
     [kissNum addObject:@0];

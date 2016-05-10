@@ -315,7 +315,10 @@
         }else
             NSLog(@"error when open db");
     }else
-        db = [FMDatabase databaseWithPath:path];
+    { db = [FMDatabase databaseWithPath:path];
+        NSLog(@"already has a db");
+    }
+    
 }
 
 - (NSInteger)numOfMessgesAtIndex:(NSInteger)index
@@ -490,6 +493,23 @@
         [db executeUpdate:sql,showTimeLabel,message.createdTime];
     }else
         NSLog(@"error when open db");
+}
+
+- (NSInteger)numOfTables
+{
+    NSInteger count = 0;
+    if ([db open]) {
+        NSString* sql = @"select name from sqlite_master where type = 'table'";
+       FMResultSet *res = [db executeQuery:sql];
+        while ([res next]) {
+            count++;
+            NSString *name = [res stringForColumnIndex:0];
+            NSLog(@"name%@",name);
+        }
+        [db close];
+    }else
+        NSLog(@"error when open db");
+    return count;
 }
 
 #pragma define will show Hello Message or not

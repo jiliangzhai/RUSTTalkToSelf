@@ -9,6 +9,7 @@
 #import "MyRegisterController.h"
 #import "MyPassworeSettingController.h"
 #import "MyUserManager.h"
+#import "MyDataSourcemanager.h"
 #import "MyInitTargetEditorController.h"
 
 @interface MyRegisterController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
@@ -99,6 +100,8 @@
         }
     }
     if (_isTarget) {
+        NSInteger currentIndex = [MyUserManager lastTargetIndex];
+        [MyDataSourcemanager creatNewTableAtIndex:currentIndex];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"newTargetCreated" object:nil];
         [self.navigationController popToRootViewControllerAnimated:YES];
         return;

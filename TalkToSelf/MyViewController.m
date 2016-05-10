@@ -31,6 +31,7 @@
     NSInteger currentIndex;
     CGPoint currentLocation;
     MessageOriation MyOriation;
+    BOOL needRefresh;
 }
 @property (weak, nonatomic) IBOutlet UITableView *MyTableView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomConstraint;
@@ -49,8 +50,10 @@
     [MyUserManager newActiveDay];
     currentIndex = [MyUserManager lastTargetIndex];
     MyOriation = isFormSelf;
+    needRefresh = NO;
     [MyDataSourcemanager sharedManager].delegate = self;
     [self layoutUI];
+    [self prepareLoadDataAtIndex:currentIndex];
     [self.MyTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
@@ -61,7 +64,7 @@
 {
     [super viewWillAppear:animated];
     
-    if (currentIndex != [MyUserManager lastTargetIndex]) {
+    if ((currentIndex != [MyUserManager lastTargetIndex]) | needRefresh) {
         currentIndex = [MyUserManager lastTargetIndex];
         totalNum = [MyDataSourcemanager numOfMessageAtindex:currentIndex];
         
@@ -71,10 +74,6 @@
                 [self.MyTableView reloadData];
             });
         });
-    }else
-    {
-        [self prepareLoadDataAtIndex:currentIndex];
-        [self.MyTableView reloadData];
     }
    
     [UIApplication sharedApplication].statusBarHidden = NO;
@@ -91,8 +90,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardChanged:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardChanged:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tableViewScrollToBottom) name:UIKeyboardDidShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userInfoDidChanged) name:@"userInfoDidChanged" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newTargetCreated) name:@"newTargetCreated" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userInfoDidChanged) name:@"setNeedRefresh" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newTargetCreated) name:@"setNeedRefresh" object:nil];
     [self tableViewScrollToBottom];
 }
 
@@ -357,30 +356,10 @@
     [self tableViewScrollToBottom];
 }
 
-#pragma userInfoNotification
-- (void)userInfoDidChanged
+#pragma need refresh
+- (void)setNeedRefresh
 {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [MyDataSourcemanager reloadMessageNum:MIN(totalNum, 5) index:currentIndex];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.MyTableView reloadData];
-        });
-    });
-}
-
-#pragma newTargetCreated Notification
-- (void)newTargetCreated
-{
-    currentIndex = [MyUserManager lastTargetIndex];
-    [MyDataSourcemanager creatNewTableAtIndex:currentIndex];
-    totalNum = [MyDataSourcemanager numOfMessageAtindex:currentIndex];
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [MyDataSourcemanager reloadMessageNum:MIN(totalNum, 5) index:currentIndex];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.MyTableView reloadData];
-        });
-    });
+    needRefresh  = YES;
 }
 
 #pragma add One Hello Message
