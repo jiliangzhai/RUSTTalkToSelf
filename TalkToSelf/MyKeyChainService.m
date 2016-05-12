@@ -13,15 +13,16 @@
 
 + (NSMutableDictionary *)getKeyChainQuery:(NSString *)service
 {
-    return [NSMutableDictionary dictionaryWithObjectsAndKeys:(__bridge id)kSecClassGenericPassword,(__bridge id)kSecClass,service,(__bridge id)kSecAttrService,service,(__bridge id)kSecAttrAccount,(__bridge id)kSecAttrAccessibleAfterFirstUnlock,(__bridge id)kSecAttrAccessible,nil];
+    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:(__bridge id)kSecClassGenericPassword,(__bridge id)kSecClass,service,(__bridge id)kSecAttrService,service,(__bridge id)kSecAttrAccount,(__bridge id)kSecAttrAccessibleAfterFirstUnlock,(__bridge id)kSecAttrAccessible,nil];
+    return dic;
 }
 
 + (void)save:(NSString *)service data:(id)data
 {
     NSMutableDictionary *keyChainQuery = [self getKeyChainQuery:service];
-    SecItemDelete((__bridge_retained CFDictionaryRef)keyChainQuery);
+    SecItemDelete((__bridge CFDictionaryRef)keyChainQuery);
     [keyChainQuery setObject:[NSKeyedArchiver archivedDataWithRootObject:data] forKey:(__bridge id)kSecValueData];
-    SecItemAdd((__bridge_retained CFDictionaryRef)keyChainQuery, NULL);
+    SecItemAdd((__bridge CFDictionaryRef)keyChainQuery, NULL);
 }
 
 + (id)load:(NSString *)service
@@ -34,7 +35,7 @@
     
     CFDataRef keyData = NULL;
     
-    OSStatus status = SecItemCopyMatching((__bridge_retained CFDictionaryRef)keyChainQuery,(CFTypeRef *)&keyData);
+    OSStatus status = SecItemCopyMatching((__bridge CFDictionaryRef)keyChainQuery,(CFTypeRef *)&keyData);
     if (status == noErr) {
         
         @try{

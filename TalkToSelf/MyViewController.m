@@ -90,8 +90,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardChanged:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardChanged:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tableViewScrollToBottom) name:UIKeyboardDidShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userInfoDidChanged) name:@"setNeedRefresh" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newTargetCreated) name:@"setNeedRefresh" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setNeedRefresh) name:@"userInfoDidChanged" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setNeedRefresh) name:@"newTargetCreated" object:nil];
     [self tableViewScrollToBottom];
 }
 
