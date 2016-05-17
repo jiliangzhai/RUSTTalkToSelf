@@ -58,7 +58,6 @@
     if (indexPath.row != [MyUserManager lastTargetIndex]) {
         [MyUserManager changeLastTargetIndexto:indexPath.row];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"didChangeTarget" object:nil];
-        
     }
 }
 

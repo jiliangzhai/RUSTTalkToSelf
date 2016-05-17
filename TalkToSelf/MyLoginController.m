@@ -63,6 +63,7 @@
 
 - (IBAction)userRegister:(id)sender {
     
+    //用户注册
     if (![MySecretManager getPassword]) {
         MyRegisterController *rc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"MyRegisterController"];
         rc.isTarget = NO;
@@ -77,6 +78,7 @@
 
 - (IBAction)login:(id)sender {
     
+    //用户登录
     if ([MySecretManager getPassword]) {
         _loginButton.hidden = YES;
         CGFloat topY = 156;
@@ -89,7 +91,6 @@
         baseView *MyBaseView = [[baseView alloc] initWithFrame:CGRectMake((CGRectGetWidth(self.view.bounds)-lockWidth)/2.0, topY, lockWidth, lockWidth)];
         MyBaseView.touchView.delegate = self;
         [self.view addSubview:MyBaseView];
-        
         [self.view layoutIfNeeded];
     }else
     {
@@ -100,6 +101,7 @@
 }
 
 - (IBAction)forgetPassword:(id)sender {
+    //密码找回
     if ([MySecretManager getPassword]) {
         MyPasswordRetrieveController *rc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"MyPasswordRetrieveController"];
         [self.navigationController pushViewController:rc animated:YES];

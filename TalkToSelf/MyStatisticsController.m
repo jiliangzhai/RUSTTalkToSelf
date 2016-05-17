@@ -58,6 +58,7 @@
     [UIApplication sharedApplication].statusBarHidden = YES;
     currentIndex = [MyUserManager lastTargetIndex];
     
+    //统计界面
     _color = [UIColor colorWithRed:111/255.0 green:132/255.0 blue:125/255.0 alpha:1.0];
     
     _userThumbnail.layer.cornerRadius = 10.0;
@@ -106,6 +107,7 @@
 {
     [super viewDidAppear:animated];
     
+    //统计数字滚动效果
     [self slideToTargetNumWithDic:self.totalNumDic];
     [self slideToTargetNumWithDic:self.targetTotalNumDic];
     [self slideToTargetNumWithDic:self.textMessageDic];
@@ -124,6 +126,7 @@
 
 - (NSMutableDictionary *)addSliderWithNum:(NSInteger)num superView:(UIView *)view size:(int)fontSize color:(UIColor*)fontColor
 {
+    //创建数字滚动效果视图
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     NSMutableArray *sliderArray = [NSMutableArray array];
     NSMutableArray *numArray = [NSMutableArray array];
@@ -155,6 +158,7 @@
 
 - (void)slideToTargetNumWithDic:(NSDictionary *)dic
 {
+    //滚动到特定视图
     NSArray *sliders = [dic objectForKey:@"sliders"];
     NSArray *nums = [dic objectForKey:@"nums"];
     NSInteger count = sliders.count;
@@ -168,6 +172,7 @@
 
 - (void)refreshDic:(NSMutableDictionary *)dic
 {
+    //更新slider
     NSArray *sliders = [dic objectForKey:@"sliders"];
     for (MyNumSlider *slider in sliders) {
         [slider removeFromSuperview];
@@ -182,8 +187,8 @@
 
 - (IBAction)changeTarget:(id)sender {
     
+    //对像选择视图
     _images = [MyUserManager targetThumbnails];
-    
     MyCollectionViewLayout *layout = [[MyCollectionViewLayout alloc] init];
     
     CGRect rect = CGRectMake(0, CGRectGetHeight([UIScreen mainScreen].bounds)*0.5-100, CGRectGetWidth([UIScreen mainScreen].bounds), 200);
@@ -219,6 +224,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    //对象切换后，更新部分slider
     if (indexPath.row != currentIndex) {
         currentIndex = indexPath.row;
         self.targetThumbnail.image = [UIImage imageWithData:[MyUserManager targetThumbnailAtIndex:currentIndex]];

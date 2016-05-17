@@ -28,6 +28,7 @@
 
 @implementation MyRegisterController
 
+//_isTarget为真表示对象编辑界面，否则为用户编辑界面
 - (void)viewDidLoad {
     [super viewDidLoad];
     

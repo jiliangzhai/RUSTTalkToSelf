@@ -20,7 +20,7 @@
 @end
 
 @implementation MyPasswordRetrieveController
-
+//根据两个简单的问题确定能否进行密码找回
 - (void)viewDidLoad {
     [super viewDidLoad];
     

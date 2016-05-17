@@ -164,8 +164,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CbN-fY-jSf">
-                                                    <rect key="frame" x="24" y="6.5" width="343" height="30"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CbN-fY-jSf">
+                                                    <rect key="frame" x="8" y="8" width="359" height="27.5"/>
                                                     <state key="normal" title="密码服务">
                                                         <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
@@ -175,8 +175,8 @@
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="CbN-fY-jSf" firstAttribute="leading" secondItem="Ziz-Xc-SEa" secondAttribute="leadingMargin" constant="16" id="6ia-7T-DGQ"/>
-                                                <constraint firstItem="CbN-fY-jSf" firstAttribute="centerX" secondItem="Ziz-Xc-SEa" secondAttribute="centerX" constant="8" id="Uh7-bH-9kb"/>
+                                                <constraint firstItem="CbN-fY-jSf" firstAttribute="leading" secondItem="Ziz-Xc-SEa" secondAttribute="leadingMargin" id="6ia-7T-DGQ"/>
+                                                <constraint firstItem="CbN-fY-jSf" firstAttribute="centerX" secondItem="Ziz-Xc-SEa" secondAttribute="centerX" id="Uh7-bH-9kb"/>
                                                 <constraint firstItem="CbN-fY-jSf" firstAttribute="bottom" secondItem="Ziz-Xc-SEa" secondAttribute="bottomMargin" id="YKZ-bV-WHY"/>
                                                 <constraint firstItem="CbN-fY-jSf" firstAttribute="top" secondItem="Ziz-Xc-SEa" secondAttribute="topMargin" id="oPM-So-Frq"/>
                                                 <constraint firstItem="CbN-fY-jSf" firstAttribute="trailing" secondItem="Ziz-Xc-SEa" secondAttribute="trailingMargin" id="rYL-70-GuL"/>

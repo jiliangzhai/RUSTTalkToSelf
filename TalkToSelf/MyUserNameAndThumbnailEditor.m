@@ -38,7 +38,7 @@
         _userThumbnail.image = [UIImage imageWithData:[MyUserManager userThumbnail]];
         _userNameInput.placeholder = [MyUserManager userName];
     }
-    _storeChange.layer.cornerRadius = 5.0;
+    //_storeChange.layer.cornerRadius = 5.0;
     _storeChange.backgroundColor = [UIColor greenColor];
     
     _selectThumbnail.layer.cornerRadius = 5.0;
@@ -55,6 +55,7 @@
 
 - (IBAction)selectNewThumbnail:(id)sender {
     
+    //头像选择
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
         
         UIImagePickerController *picker = [[UIImagePickerController alloc] init];
@@ -67,6 +68,7 @@
 
 - (IBAction)storeTheChange:(id)sender {
     
+    //确认变更
     NSString *str = _userNameInput.text;
     [str stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     if (![str isEqualToString:@""]) {

@@ -20,7 +20,7 @@
 @end
 
 @implementation MyPassworeSettingController
-
+//_isSet为真执行密码设定逻辑，否则执行密码找回逻辑
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -46,7 +46,6 @@
 #pragma delegate
 - (void)touchEndedWithCode:(NSString *)code
 {
-
     if (code) {
         if (_isSet) {
             if (!password) {

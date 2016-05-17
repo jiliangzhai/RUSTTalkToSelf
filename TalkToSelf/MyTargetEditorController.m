@@ -11,7 +11,6 @@
 #import "MyDataSourcemanager.h"
 #import "MyUserNameAndThumbnailEditor.h"
 #import "MyRegisterController.h"
-#import "MyCollectionViewController.h"
 #import "MyCollectionViewCell.h"
 #import "MyCollectionViewLayout.h"
 
@@ -48,6 +47,7 @@
 }
 
 - (IBAction)targetEditored:(id)sender {
+    //对象信息编辑
     MyUserNameAndThumbnailEditor *editor = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"UserNameAndThumbnail"];
     editor.isTarget = YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userInfoDidChanged) name:@"userInfoDidChanged" object:nil];
@@ -55,7 +55,7 @@
 }
 
 - (IBAction)changeTarget:(id)sender {
-    
+    //切换对话对象
     _images = [MyUserManager targetThumbnails];
     
     MyCollectionViewLayout *layout = [[MyCollectionViewLayout alloc] init];
@@ -78,19 +78,21 @@
 }
 
 - (IBAction)creatNewTarget:(id)sender {
+    //创建新的对象
     MyRegisterController *rc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"MyRegisterController"];
     rc.isTarget = YES;
     [self.navigationController pushViewController:rc animated:YES];
 }
 
 - (IBAction)removeAllMessage:(id)sender {
-    
+    //清空当前对象消息
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"请确认清楚所有消息！" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
     [alertView show];
 }
 
 - (void)userInfoDidChanged
 {
+    //对象信息更改后更新视图显示
     _targetThumbnail.image = [UIImage imageWithData:[MyUserManager targetThumbnailAtIndex:[MyUserManager lastTargetIndex]]];
     _targetName.text = [MyUserManager targetNameAtIndex:[MyUserManager lastTargetIndex]];
     _messageNum.text = [NSString stringWithFormat:@"%li",(long)[MyDataSourcemanager numOfMessageAtindex:[MyUserManager lastTargetIndex]]];
@@ -119,6 +121,7 @@
         
         self.targetThumbnail.image = [UIImage imageWithData:[MyUserManager targetThumbnailAtIndex:[MyUserManager lastTargetIndex]]];
         self.targetName.text = [MyUserManager targetNameAtIndex:[MyUserManager lastTargetIndex]];
+        _messageNum.text = [NSString stringWithFormat:@"%li",(long)[MyDataSourcemanager numOfMessageAtindex:[MyUserManager lastTargetIndex]]];
     }
     
     CGFloat ratioX = 20/CGRectGetWidth([UIScreen mainScreen].bounds);

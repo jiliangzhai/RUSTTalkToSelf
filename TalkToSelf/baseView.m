@@ -16,6 +16,7 @@
     self=[super initWithFrame:frame];
     if (self) {
         
+        //计算底层图案大小
         self.backgroundColor=[UIColor clearColor];
         radius=frame.size.width/9.5;
         CGFloat mariginUpDown=(frame.size.height-7.5*radius)/2.0;
@@ -35,6 +36,7 @@
         }
     }
     
+    //添加滑动视图
     _touchView=[[touchView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
     _touchView.radius=radius;
     _touchView.rects=[_rects copy];
@@ -46,6 +48,7 @@
 
 -(void) drawRect:(CGRect)rect
 {
+    //绘制底层图案
     UIBezierPath* path1=[[UIBezierPath alloc] init];
     
     for (int i=0; i<9; i++) {

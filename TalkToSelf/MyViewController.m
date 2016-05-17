@@ -15,7 +15,6 @@
 #import "MyInputView.h"
 #import "MyDataSourcemanager.h"
 #import "MyUserManager.h"
-#import "BounceView.h"
 #import "MyUserInformationEditor.h"
 #import "MyTargetEditorController.h"
 #import "ZYSpreadButton.h"
@@ -47,15 +46,20 @@
     self.navigationController.navigationBarHidden = YES;
     self.MyTableView.showsVerticalScrollIndicator = NO;
     
+    //活跃天数
     [MyUserManager newActiveDay];
+    //变量初始值
     currentIndex = [MyUserManager lastTargetIndex];
     MyOriation = isFormSelf;
     needRefresh = NO;
     [MyDataSourcemanager sharedManager].delegate = self;
+    //inputView和spreadButton
     [self layoutUI];
+    //确定要加载的消息
     [self prepareLoadDataAtIndex:currentIndex];
     [self.MyTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     
+    //添加tap以关闭键盘
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
     [self.view addGestureRecognizer:tap];
 }
@@ -64,6 +68,7 @@
 {
     [super viewWillAppear:animated];
     
+    //当视图出现或重新出现时判断是否需要刷新操作
     if ((currentIndex != [MyUserManager lastTargetIndex]) | needRefresh) {
         currentIndex = [MyUserManager lastTargetIndex];
         totalNum = [MyDataSourcemanager numOfMessageAtindex:currentIndex];
@@ -84,13 +89,15 @@
 {
     [super viewDidAppear:animated];
     
+    //开启系统对话状态下判断是否需要发送消息
     if ([MyUserManager willShowSystemmessage]) {
          [self addOneHelloMessageFromSystem];
     }
+    //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardChanged:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardChanged:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tableViewScrollToBottom) name:UIKeyboardDidShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setNeedRefresh) name:@"userInfoDidChanged" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setNeedRefresh) name:@"userInfoDidChange" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setNeedRefresh) name:@"newTargetCreated" object:nil];
     [self tableViewScrollToBottom];
 }
@@ -108,15 +115,16 @@
 
 - (void)layoutUI
 {
+    //输入框
     inputView = [[MyInputView alloc] initPrivate];
     [self.view addSubview:inputView];
     inputView.delegate = self;
     inputView.superController = self;
-    
+    //下拉刷新
     UIRefreshControl *refresh = [[UIRefreshControl alloc] init];
     [refresh addTarget:self action:@selector(tableviewNeedRefresh:) forControlEvents:UIControlEventValueChanged];
     [self.MyTableView addSubview:refresh];
-    
+    //多选按钮
     ZYSpreadSubButton *sub1 = [[ZYSpreadSubButton alloc] initWithBackgroundImage:[UIImage imageNamed:@"btn1.png"] highlightImage:nil clickedBlock:^(int index, UIButton *sender) {
         UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
         MyUserInformationEditor *userInfo = [story instantiateViewControllerWithIdentifier:@"MyUserInfo"];
@@ -149,6 +157,7 @@
 
 - (void)prepareLoadDataAtIndex:(NSInteger)index
 {
+    //初次加载至多5条消息
     totalNum = [MyDataSourcemanager numOfMessageAtindex:currentIndex];
     if (![MyDataSourcemanager dataSources]) {
         if (totalNum != 0) {
@@ -159,6 +168,7 @@
 
 - (void)keyboardChanged:(NSNotification *)notification
 {
+    //根据键盘的出现消失，调整输入框的位置，动作尽量协调
     NSDictionary *userInfo = [notification userInfo];
     NSTimeInterval animationDuration;
     UIViewAnimationCurve curve;
@@ -177,7 +187,7 @@
     }else
         _bottomConstraint.constant = 50;
     
-    [self.view layoutIfNeeded];//find out what it works for
+    [self.view layoutIfNeeded];
     
     CGRect frame = inputView.frame;
     frame.origin.y = keyboardFrameEnd.origin.y - CGRectGetHeight(frame);
@@ -188,6 +198,7 @@
 
 - (void)tableViewScrollToBottom
 {
+    //使最后一条消息可见
     if ([MyDataSourcemanager dataSources].count == 0) {
         return;
     }
@@ -237,12 +248,13 @@
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
-    [self.view endEditing:YES];
+    [self.view endEditing:YES];//滑动视图，结束编辑状态，键盘会收回
 }
 
 #pragma MyTableViewCellDelegate
 - (void)thumbnailClickedWithMessageOriation:(MessageOriation)oriation
 {
+    //点击用户和对象头像进入对应的编辑界面
     if (oriation == isFormSelf) {
         UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
         MyUserInformationEditor *userInfo = [story instantiateViewControllerWithIdentifier:@"MyUserInfo"];
@@ -258,6 +270,7 @@
 
 - (void)thumbnailLongPressedAtLocation:(CGPoint)location messageOriation:(MessageOriation)oriation
 {
+    //长按对象头像，调出弹球效果
     if (oriation == isFormSystem) {
         MyBounceView *view = [[MyBounceView alloc] initWithFrame:self.view.bounds image:[UIImage imageWithData:[MyUserManager targetThumbnailAtIndex:currentIndex]] startLocation:location];
         view.backgroundColor = [UIColor clearColor];
@@ -268,8 +281,8 @@
 
 - (void)deleteCell:(MyTableViewCell *)cell
 {
+    //cell删除
     [MyDataSourcemanager removeMessage:cell.cellFrame index:currentIndex];
-    
     NSIndexPath *path = [self.MyTableView indexPathForCell:cell];
     [self.MyTableView deleteRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationLeft];
 }
@@ -277,6 +290,7 @@
 #pragma inputView Delegate
 - (void)heightOfTextViewChangedBy:(float)height
 {
+    //根据输入textView中的文本高度，调整inputView的位置
     _bottomConstraint.constant +=height;
     [self.view layoutIfNeeded];
     [self tableViewScrollToBottom];
@@ -284,6 +298,7 @@
 
 - (void)sendTextMessage:(NSString *)textMessage
 {
+    //文本输入
     inputView.textInputView.text = @"";
     [inputView changeSendButton:YES];
     NSMutableDictionary* dic = [self MessageDicWithMessageType:TextMessage];
@@ -294,6 +309,7 @@
 
 - (void)sendPicMessage:(UIImage *)Pic
 {
+    //图片输入
     NSMutableDictionary* dic = [self MessageDicWithMessageType:PicMessage];
     [dic setObject:Pic forKey:@"picMessage"];
     MyMessage *newMessage = [[MyMessage alloc] initWithDic:dic];
@@ -302,6 +318,7 @@
 
 - (void)sentVoiceMessage:(NSData *)voiceMessage duration:(NSInteger)duration
 {
+    //语音输入
     NSMutableDictionary* dic = [self MessageDicWithMessageType:VoiceMessage];
     [dic setObject:voiceMessage forKey:@"voiceMessage"];
     [dic setObject:[NSNumber numberWithInteger:duration] forKey:@"voiceDuration"];
@@ -311,6 +328,7 @@
 
 - (NSMutableDictionary *)MessageDicWithMessageType:(MessageType)type
 {
+    //生成消息的初始化词典
     NSDate *date = [NSDate date];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];//格式大小写很敏感药注意啊
@@ -339,12 +357,14 @@
 
 - (void)tap:(UITapGestureRecognizer*)tap
 {
+    //结束编辑状态
     [self.view endEditing:YES];
 }
 
 #pragma MyDataSourceDelegate
 - (void)newMessageAdded:(MyCellFrame *)cellFrame
 {
+    //tabelView添加新消息
     MyTableViewCell *cell = [self.MyTableView dequeueReusableCellWithIdentifier:@"rust"];
     if (!cell) {
         cell = [[MyTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"rust"];
@@ -359,18 +379,21 @@
 #pragma need refresh
 - (void)setNeedRefresh
 {
+    //视图重新出现时，需要更新数据
     needRefresh  = YES;
 }
 
 #pragma add One Hello Message
 - (void)addOneHelloMessageFromSystem
 {
+    //添加一条系统消息
     [MyDataSourcemanager initSystemMessageAtIndex:currentIndex];
 }
 
 #pragma refresh
 - (void)tableviewNeedRefresh:(UIRefreshControl *)refresh
 {
+    //下拉刷新
     NSInteger num = [self.MyTableView numberOfRowsInSection:currentIndex];
     totalNum = [MyDataSourcemanager numOfMessageAtindex:currentIndex];
     if (num >= totalNum) {
@@ -381,12 +404,11 @@
         
         NSInteger targetNum = MIN(totalNum, num+5);
         [MyDataSourcemanager dataSourcesWithNum:targetNum index:currentIndex];
-        
         dispatch_async(dispatch_get_main_queue(), ^{
             
             [self.MyTableView reloadData];
             [refresh endRefreshing];
-            [self.MyTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:targetNum-num inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+            [self.MyTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
         });
     });
 }

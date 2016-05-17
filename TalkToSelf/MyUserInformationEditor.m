@@ -35,9 +35,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    //添加需要显示的信息
     [UIApplication sharedApplication].statusBarHidden = YES;
     _userName.text = [MyUserManager userName];
-    _messageCount.text = [NSString stringWithFormat:@"%li",[MyUserManager activeDays]];
+    long messageCount = [MyUserManager activeDays];
+    _messageCount.text = [NSString stringWithFormat:@"%li",messageCount];
     _userThumbnail.image = [UIImage imageWithData:[MyUserManager userThumbnail]];
     _userThumbnail.layer.cornerRadius = 5.0;
     _userThumbnail.layer.masksToBounds = YES;
@@ -60,6 +62,7 @@
 
 
 - (IBAction)turnDownSystemMessage:(id)sender {
+    //关闭系统对话
     BOOL show = [MyUserManager willShowSystemmessage];
     [MyUserManager showSystem:!show];
     
@@ -68,12 +71,14 @@
 }
 
 - (IBAction)privacySetting:(id)sender {
+    //密码重置
     MyPassworeSettingController *setting = [[MyPassworeSettingController alloc] init];
     setting.isSet = NO;
     [self.navigationController pushViewController:setting animated:YES];
 }
 
 - (IBAction)UserNameAndThumbnail:(id)sender {
+    //用户昵称及头像编辑
     UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
     MyUserNameAndThumbnailEditor *editor = [story instantiateViewControllerWithIdentifier:@"UserNameAndThumbnail"];
     editor.isTarget = NO;
@@ -84,6 +89,7 @@
 #pragma userInfoNotification
 - (void)userInfoDidChanged
 {
+    //用户信息更改后刷新视图
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSString *str = [MyUserManager userName];
         UIImage *image = [UIImage imageWithData:[MyUserManager userThumbnail]];

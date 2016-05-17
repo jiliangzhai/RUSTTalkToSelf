@@ -17,6 +17,7 @@
 
 + (UIImage *)getTheImageWithName:(NSString *)name
 {
+    //图片消息获取
     NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     path = [path stringByAppendingPathComponent:[NSString stringWithFormat:@"images/%@",name]];
     
@@ -25,6 +26,7 @@
 
 - (NSString*)storeTheImage
 {
+    //图片消息存储
     NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     NSUUID *uuid = [[NSUUID alloc] init];
     NSString *key = [uuid UUIDString];
@@ -46,6 +48,7 @@
 
 + (NSData *)getTheDataWithName:(NSString *)name
 {
+    //语音消息获取
     NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     path = [path stringByAppendingPathComponent:[NSString stringWithFormat:@"voices/%@",name]];
     
@@ -54,6 +57,7 @@
 
 - (NSString *)storeTheData
 {
+    //语音消息存储
     NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     NSUUID *uuid = [[NSUUID alloc] init];
     NSString *key = [uuid UUIDString];
@@ -143,11 +147,12 @@
     }else
        [MyDataSourcemanager sharedManager].dataSource = [NSMutableArray array];
     [MyDataSourcemanager sharedManager].dataSource = [[MyDataSourcemanager sharedManager] loadMoreMessageAtIndex:index totalCount:num];
-    return;//初次加载或者刷新的时候用
+    return;//初次加载
 }
 
 + (void)reloadMessageNum:(NSInteger)num index:(NSInteger)index
 {
+    //加载更多消息
     if (![MyDataSourcemanager sharedManager].dataSource) {
         [MyDataSourcemanager sharedManager].dataSource = [NSMutableArray array];
     }
@@ -156,6 +161,7 @@
 
 + (void)addMessage:(MyMessage *)message index:(NSInteger)index
 {
+    //添加消息到数据库
     MyCellFrame *lastCellFrame = [MyDataSourcemanager sharedManager].dataSource.lastObject;
     if (lastCellFrame) {
          message.showTimeLabel = [[MyDataSourcemanager sharedManager] timeOffsetBetweenStartDate:lastCellFrame.message.createdTime toEndStr:message.createdTime];
@@ -181,6 +187,7 @@
 
 + (void)removeMessage:(MyCellFrame *)frame index:(NSInteger)index
 {
+    //删除消息并调整相邻消息的日期标签显示与否
     NSMutableArray *array = [MyDataSourcemanager sharedManager].dataSource;
     if (array) {
         NSInteger num = [array indexOfObject:frame];
@@ -212,6 +219,7 @@
 
 + (NSString *)helloMessageAccordingToTime
 {
+    //根据当前时间，发送系统消息
     NSDate *currentTime = [NSDate date];
     NSString *helloWord;
     if ([currentTime hour]>=5 && [currentTime hour]<12) {
@@ -228,6 +236,7 @@
 
 + (void)initSystemMessageAtIndex:(NSInteger)index
 {
+    //完整系统消息并发布
     if (![[MyDataSourcemanager sharedManager] showHolleMessageAtIndex:index]) {
         return;
     }
@@ -264,39 +273,9 @@
     [[MyDataSourcemanager sharedManager] creatNewTableWithIndex:index];
 }
 
-/*- (void)creatSources
-{
-    NSString *userName = @"rust";
-    NSDate *date = [NSDate date];
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    NSString *dateStr = [formatter stringFromDate:date];
-    UIImage *image = [UIImage imageNamed:@"1.jpg"];
-    MessageOriation oriation1 = isFormSelf;
-    MessageOriation oriation2 = isFormSystem;
-    MessageType type1 = TextMessage;
-    MessageType type2 = PicMessage;
-    NSString *textMessage = @"hello world";
-    UIImage *picMessage = [UIImage imageNamed:@"0.jpg"];
-    
-    NSDictionary *dic1 = @{@"userName":userName,@"thumbnail":image,@"createdTime":dateStr,@"messageOriation":[NSNumber numberWithInteger:oriation2],@"messageType":[NSNumber numberWithInteger:type1],@"textMessage":textMessage};
-    NSDictionary *dic2 = @{@"userName":userName,@"thumbnail":image,@"createdTime":dateStr,@"messageOriation":[NSNumber numberWithInteger:oriation1],@"messageType":[NSNumber numberWithInteger:type2],@"picMessage":picMessage};
-    Message *message1 = [[Message alloc] initWithDic:dic1];
-    message1.showTimeLabel = YES;
-    Message *message2 = [[Message alloc] initWithDic:dic2];
-    message2.showTimeLabel = NO;
-    CellFrame *frame1 = [[CellFrame alloc] initWithMessage:message1];
-    CellFrame *frame2 = [[CellFrame alloc] initWithMessage:message2];
-    self.dataSource = [[NSMutableArray alloc] init];
-    [self.dataSource addObject:frame1];
-    [self.dataSource addObject:frame2];
-    
-    [MyDataSourcemanager addMessage:message1 index:0];
-    [MyDataSourcemanager addMessage:message2 index:0];
-}*/
-
 - (void)setupDB
 {
+    //数据库初始化，存在 db文件则打开该文件若不存在则创建并创建第一个表
     NSString *directory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     NSString *path = [directory stringByAppendingPathComponent:@"messages.db"];
     
@@ -308,7 +287,7 @@
             NSString *sql = @"create table 'target0' ('id' INTEGER PRIMARY KEY AUTOINCREMENT  NOT NULL, 'createdTime' TEXT, 'messageType' INTEGER, 'messageOriation' INTEGER, 'messageBody' TEXT, 'showTimeLabel' INTEGER, 'voiceDuration' INTEGER)";
             BOOL res = [db executeUpdate:sql];
             if (!res) {
-                NSLog(@"%@01",[db lastError]);
+                NSLog(@"%@",[db lastError]);
             }else
                 NSLog(@"create table");
             [db close];
@@ -323,6 +302,7 @@
 
 - (NSInteger)numOfMessgesAtIndex:(NSInteger)index
 {
+    //消息数量
     if ([db open]) {
         NSInteger count = 0;
         NSString *sql = [NSString stringWithFormat:@"select (id) from target%li",(long)index];
@@ -340,6 +320,7 @@
 
 - (NSInteger)numOfTextMessageAtIndex:(NSInteger)index
 {
+    //文本消息数量
     if ([db open]) {
         NSInteger count = 0;
         NSString *sql = [NSString stringWithFormat:@"select (id) from target%li where messageType = 0",(long)index];
@@ -357,6 +338,7 @@
 
 - (NSInteger)numOfPicMessageAtIndex:(NSInteger)index
 {
+    //图片消息数量
     if ([db open]) {
         NSInteger count = 0;
         NSString *sql = [NSString stringWithFormat:@"select (id) from target%li where messageType = 1",(long)index];
@@ -374,6 +356,7 @@
 
 - (NSInteger)numOfVoiceMessageAtIndex:(NSInteger)index
 {
+    //语音消息数量
     if ([db open]) {
         NSInteger count = 0;
         NSString *sql = [NSString stringWithFormat:@"select (id) from target%li where messageType = 2",(long)index];
@@ -391,6 +374,7 @@
 
 - (void)creatNewTableWithIndex:(NSInteger)index
 {
+    //创建新的表以存储新建对象消息
     if ([db open]) {
         NSString *sql = [NSString stringWithFormat:@"create table 'target%li' ('id' INTEGER PRIMARY KEY AUTOINCREMENT  NOT NULL, 'createdTime' TEXT, 'messageType' INTEGER, 'messageOriation' INTEGER, 'messageBody' TEXT, 'showTimeLabel' INTEGER, 'voiceDuration' INTEGER)",(long)index];
         BOOL res = [db executeUpdate:sql];
@@ -405,6 +389,7 @@
 
 - (void)insertMessage:(MyMessage *)message index:(NSInteger)index
 {
+    //新消息存储
     switch (message.messageType) {
         case 0:
             message.messageBody = message.textMessage;
@@ -433,6 +418,7 @@
 
 - (void)removeAllMessageAtIndex:(NSInteger)index
 {
+    //清除某一对象的所有消息
     if ([db open]) {
         NSString* sql = [NSString stringWithFormat:@"delete from target%li",(long)index];
         BOOL res = [db executeUpdate:sql];
@@ -447,6 +433,7 @@
 
 - (void)deleteMessage:(MyMessage *)message index:(NSInteger)index
 {
+    //删除一条消息
     if ([db open]) {
         NSString* sql = [NSString stringWithFormat:@"delete from target%li where createdTime = ?",(long)index];
         BOOL res = [db executeUpdate:sql,message.createdTime];
@@ -461,6 +448,7 @@
 
 - (NSMutableArray *)loadMoreMessageAtIndex:(NSInteger)index totalCount:(NSInteger)count
 {
+    //加载某对象的特定数量的消息
     NSMutableArray *array = [NSMutableArray array];
    
     if ([db open]) {
@@ -488,23 +476,24 @@
 
 - (void)modifyTheTimeLabelTo:(BOOL)showTimeLabel message:(MyMessage *)message index:(NSInteger)index
 {
+    //更改时间标签显示属性
     if ([db open]) {
         NSString *sql = [NSString stringWithFormat:@"update target%li set showTimeLabel = ? where createdTime = ?",(long)index];
         [db executeUpdate:sql,showTimeLabel,message.createdTime];
+        [db close];
     }else
         NSLog(@"error when open db");
 }
 
 - (NSInteger)numOfTables
 {
+    //db文件中表的数量
     NSInteger count = 0;
     if ([db open]) {
         NSString* sql = @"select name from sqlite_master where type = 'table'";
        FMResultSet *res = [db executeQuery:sql];
         while ([res next]) {
             count++;
-            NSString *name = [res stringForColumnIndex:0];
-            NSLog(@"name%@",name);
         }
         [db close];
     }else
@@ -515,6 +504,7 @@
 #pragma define will show Hello Message or not
 - (BOOL)showHolleMessageAtIndex:(NSInteger)index
 {
+    //是否添加系统信息
     if ([db open]) {
         NSString *lastMessageTime;
         NSString* sql = [NSString stringWithFormat:@"select * from target%li order by id desc limit 1",(long)index];
@@ -528,7 +518,6 @@
             NSDate *endDate = [NSDate dateFromString:sunEnd withFormat:@"yyyy-MM-dd HH:mm:ss"];
             
             NSTimeInterval timeInterval = [[NSDate date] timeIntervalSinceDate:endDate];
-            
             if (fabs (timeInterval) > 21600) {
                 return YES;
             }
@@ -545,6 +534,7 @@
 
 - (BOOL)timeOffsetBetweenStartDate:(NSString *)startDateStr toEndStr:(NSString *)endDateStr
 {
+    //
     if (!startDateStr) {
         return YES;
     }
@@ -557,7 +547,7 @@
     
     NSTimeInterval timeInterval = [startDate timeIntervalSinceDate:endDate];
     
-    if (fabs (timeInterval) > 30) {
+    if (fabs (timeInterval) > 3000) {
         return YES;
     }else{
         return NO;

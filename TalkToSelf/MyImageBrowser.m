@@ -13,6 +13,7 @@ static UIImageView *presentedImageView;
 
 + (void)presentImageView:(UIImageView *)imageView
 {
+    //放大显示图片
     UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
     UIView *bgView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     bgView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.6];
@@ -39,6 +40,7 @@ static UIImageView *presentedImageView;
 
 + (void)hideImageView:(UITapGestureRecognizer *)tap
 {
+    //图片还原
     UIView *bgView = [tap view];
     UIImageView *imageView = (UIImageView *)[bgView viewWithTag:1];
     

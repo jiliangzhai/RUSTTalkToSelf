@@ -17,7 +17,8 @@
     CGFloat screenW = CGRectGetWidth([UIScreen mainScreen].bounds);
     
     if (message.showTimeLabel) {
-        CGSize charactersSize = [message.createdTime sizeWithFont:[UIFont systemFontOfSize:11] constrainedToSize:CGSizeMake(300, 100) lineBreakMode:NSLineBreakByWordWrapping];
+        //CGSize charactersSize = [message.createdTime sizeWithFont:[UIFont systemFontOfSize:11] constrainedToSize:CGSizeMake(300, 100) lineBreakMode:NSLineBreakByWordWrapping];
+        CGSize charactersSize = [self textHeight:message.createdTime size:CGSizeMake(300, 100) fontSize:11];
         CGFloat timeWidth = charactersSize.width+10;
         CGFloat timeHeight = charactersSize.height+10;
         CGFloat timeX = (screenW - timeWidth)/2;
@@ -31,7 +32,8 @@
     CGFloat thumbY = CGRectGetMaxY(_timeLabelFrame)+10;
     _thumbnailFrame = CGRectMake(thumbX, thumbY, 50, 50);
     
-    CGSize userNameStrSize = [message.userName sizeWithFont:[UIFont systemFontOfSize:11] constrainedToSize:CGSizeMake(300, 100)];
+    //CGSize userNameStrSize = [message.userName sizeWithFont:[UIFont systemFontOfSize:11] constrainedToSize:CGSizeMake(300, 100)];
+    CGSize userNameStrSize = [self textHeight:message.userName size:CGSizeMake(300, 100) fontSize:11];
     CGFloat userNameW = userNameStrSize.width+10;
     CGFloat userNameH = userNameStrSize.height+10;
     CGFloat userNameX = thumbX+22-userNameW/2;
@@ -44,7 +46,8 @@
     
     switch (message.messageType) {
         case 0:
-            contentSize = [message.textMessage sizeWithFont:[UIFont systemFontOfSize:14] constrainedToSize:CGSizeMake(200, CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping];
+            //contentSize = [message.textMessage sizeWithFont:[UIFont systemFontOfSize:14] constrainedToSize:CGSizeMake(200, CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping];
+            contentSize = [self textHeight:message.textMessage size:CGSizeMake(200, CGFLOAT_MAX) fontSize:14];
             contentSize = CGSizeMake(contentSize.width+40, contentSize.height+20);
             break;
         case 1:
@@ -77,4 +80,17 @@
     
     return CGSizeMake(width, height);
 }
+
+- (CGSize)textHeight:(NSString *)text size:(CGSize)size fontSize:(NSInteger)fontSize
+{
+    NSDictionary *dic = @{NSFontAttributeName:[UIFont systemFontOfSize:fontSize]};
+    CGSize targetSize = [text boundingRectWithSize:size options:NSStringDrawingTruncatesLastVisibleLine|NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:dic context:nil].size;
+    return targetSize;
+}
 @end
+
+
+
+
+
+

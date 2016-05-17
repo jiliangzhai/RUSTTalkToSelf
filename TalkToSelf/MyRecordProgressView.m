@@ -72,8 +72,6 @@
             self.alpha = 1.0;
         } completion:^(BOOL finished) {
         }];
-        
-        //[self setNeedsDisplay];
     });
 }
 

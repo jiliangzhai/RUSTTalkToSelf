@@ -69,11 +69,13 @@
     return self;
 }
 
+//点击头像
 - (void)thumbnailClicked:(UIButton *)sender
 {
     [self.delegate thumbnailClickedWithMessageOriation:self.oriation];
 }
 
+//长按头像
 - (void)longPress:(UILongPressGestureRecognizer *)longPress
 {
     if (longPress.state == UIGestureRecognizerStateBegan) {
@@ -83,6 +85,7 @@
     }
 }
 
+//消息内容点击
 - (void)contentButtonClicked:(UIButton *)sender
 {
     if (_cellFrame.message.messageType == VoiceMessage) {
@@ -98,16 +101,10 @@
     }else if (_cellFrame.message.messageType == PicMessage)
     {
         [MyImageBrowser presentImageView:_contentButton.picImageView];
-    }else
-    {
-        //激活copy操作，往后可能还会加更多操作的
-        [_contentButton becomeFirstResponder];
-        UIMenuController *controller = [UIMenuController sharedMenuController];
-        [controller setTargetRect:self.contentButton.frame inView:self.contentButton.superview];
-        [controller setMenuVisible:YES animated:YES];
     }
 }
 
+//长按消息内容
 - (void)longPressOnContent:(UILongPressGestureRecognizer *)press
 {
     [self becomeFirstResponder];
@@ -129,17 +126,20 @@
 
 - (void)PlayerStartToLoadData
 {
+    //加载语音
     [_contentButton beginLoadVoice];
 }
 
 - (void)PlayerStartToPlayVoice
 {
+    //播放语音
     [[UIDevice currentDevice] setProximityMonitoringEnabled:YES];
     [_contentButton didLoadVoice];
 }
 
 - (void)playerDidFinishPlay
 {
+    //播放完成
     voiceIsPlaying = NO;
     [[UIDevice currentDevice] setProximityMonitoringEnabled:NO];
     [_contentButton stopVoicePlay];
@@ -148,6 +148,7 @@
 
 - (void)setCellFrame:(MyCellFrame *)cellFrame
 {
+    //根据cellFrame决定cell的内容布局
     _cellFrame = cellFrame;
     message = cellFrame.message;
     self.oriation = message.messageOriation;

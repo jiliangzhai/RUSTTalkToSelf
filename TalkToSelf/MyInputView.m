@@ -20,7 +20,6 @@
     CGFloat originalHeight;
     CGFloat padding;
     CGFloat topBottom;
-    NSInteger numOfLines;
     BOOL lastSendButtonState;
 }
 
@@ -88,8 +87,6 @@
         self.layer.borderColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.3].CGColor;
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewDidEndEditing:) name:UIKeyboardWillHideNotification object:nil];
-        originalHeight = 0.0;
-        numOfLines = 1;
         padding = _textInputView.contentInset.left+_textInputView.contentInset.right+_textInputView.textContainerInset.left+_textInputView.textContainerInset.right+_textInputView.textContainer.lineFragmentPadding+_textInputView.textContainer.lineFragmentPadding;
         topBottom = _textInputView.contentInset.top+_textInputView.contentInset.bottom+_textInputView.textContainerInset.top+_textInputView.textContainerInset.bottom;
     }
@@ -99,9 +96,9 @@
 
 - (void)sendMessageButtonPressed:(UIButton *)button
 {
+    //发送按键点击
     lastSendButtonState = !lastSendButtonState;
     if (self.isAbleToSendMessage) {
-        //NSString *message = [self.textInputView.text stringByReplacingOccurrencesOfString:@"  " withString:@""];
         NSString *message = [self.textInputView.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         if (![message isEqualToString:@""]) {
             [self.delegate sendTextMessage:message];
@@ -123,6 +120,7 @@
 
 - (void)changeMessageState:(UIButton *)button
 {
+    //转换消息模式
     _voiceHoldButton.hidden = !_voiceHoldButton;
     _textInputView.hidden = !_textInputView.hidden;
     beginVoiceRecorde = !beginVoiceRecorde;
@@ -140,6 +138,7 @@
 #pragma mark recorde button touched
 - (void)beginToRecorde:(UIButton *)button
 {
+    //开始录音
     [MP3 startRecord];
     playTime = 0;
     playTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerCount) userInfo:nil repeats:YES];
@@ -149,6 +148,7 @@
 
 - (void)timerCount
 {
+    //超时结束录音
     playTime++;
     if (playTime>60) {
         [self didFinishRecord:nil];
@@ -157,6 +157,7 @@
 
 - (void)didFinishRecord:(UIButton *)button
 {
+    //结束录音
     if (playTimer) {
         [MP3 stopRecord];
         [playTimer invalidate];
@@ -167,6 +168,7 @@
 
 - (void)cancelVoiceRecord:(UIButton *)button
 {
+    //取消录音
     if (playTimer) {
         [MP3 cancelRecord];
         [playTimer invalidate];
@@ -181,6 +183,7 @@
 
 - (void)changeSendButton:(BOOL)isPhoto
 {
+    //发送按键与照片按键切换
     if (isPhoto)
         _textInputView.frame = CGRectMake(55, 5,CGRectGetWidth([UIScreen mainScreen].bounds)-110, 40);
     self.isAbleToSendMessage = !isPhoto;
@@ -214,21 +217,23 @@
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
+    //用户开始编辑文本消息
     _messageHoldLabel.hidden = _textInputView.text.length>0;
     lastSendButtonState = YES;
-    
+    CGRect rect = [[textView layoutManager] usedRectForTextContainer:[textView textContainer]];
+    originalHeight = CGRectGetHeight(rect);
 }
 - (void)textViewDidChange:(UITextView *)textView
 {
+    //文本消息变化
     CGSize size;
-    if ([textView.text isEqualToString:@""]) {
-        //size = [@"hi" sizeWithFont:[UIFont systemFontOfSize:20] constrainedToSize:CGSizeMake(textView.frame.size.width-padding,CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping];
-        size.height = 24;
-    }else
-    {
-        size = [textView.text sizeWithFont:[UIFont systemFontOfSize:20] constrainedToSize:CGSizeMake(textView.frame.size.width-padding,CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping];
+    CGRect rect = [[textView layoutManager] usedRectForTextContainer:[textView textContainer]];
+    size = rect.size;
+    CGFloat height = ceilf(CGRectGetHeight(rect));
+    if (height!=originalHeight) {
+        [self resizeAccordingToTextViewHeightChangedBy:height];
+        originalHeight = height;
     }
-    [self resizeAccordingToTextViewHeightChangedBy:size.height];
     BOOL newSendButtonState = _textInputView.text.length>0? NO:YES;
     if (newSendButtonState != lastSendButtonState) {
         [self changeSendButton:newSendButtonState];
@@ -240,6 +245,7 @@
 
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
+    //文本消息结束编辑
      _messageHoldLabel.hidden = _textInputView.text.length>0;
     originalHeight = 0;
 }
@@ -295,25 +301,27 @@
 
 - (void)resizeAccordingToTextViewHeightChangedBy:(float)height
 {
-    CGRect textViewFrame = _textInputView.frame;
-    CGRect inputViewFrame = self.frame;
-    CGFloat targetHeight = height+topBottom;
-    if (textViewFrame.size.height > 40 | targetHeight>40) {
-        if (targetHeight > 88) {
-            return;
-        }
+    //根据文本信息调整ui
+    if (height>80) {
+        return;
+    }else
+    {
+        CGRect textViewFrame = _textInputView.frame;
+        CGRect inputViewFrame = self.frame;
+        CGFloat targetHeight = height+topBottom;
+        
         CGFloat changedHeight = targetHeight - textViewFrame.size.height;
         textViewFrame.size.height = targetHeight;
         inputViewFrame.size.height = targetHeight+10;
         inputViewFrame.origin.y -= changedHeight;
-        
+            
         _textInputView.frame = textViewFrame;
         self.frame = inputViewFrame;
-        
+            
         [self.delegate heightOfTextViewChangedBy:changedHeight];
     }
-    
 }
+
 @end
 
 

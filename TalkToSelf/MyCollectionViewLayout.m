@@ -40,6 +40,7 @@
 
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect
 {
+    //处于中间位置的单元格放大
     NSArray *array = [super layoutAttributesForElementsInRect:rect];
     
     CGFloat centerX = self.collectionView.contentOffset.x + self.collectionView.frame.size.width * 0.5;
@@ -56,6 +57,7 @@
 
 - (CGPoint)targetContentOffsetForProposedContentOffset:(CGPoint)proposedContentOffset
 {
+    //每次滑动后使离中心位置最近的单元格居中
     CGRect rect;
     rect.origin = proposedContentOffset;
     rect.size = self.collectionView.frame.size;
