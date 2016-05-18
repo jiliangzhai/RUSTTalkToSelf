@@ -15,8 +15,6 @@
 		DE265DFC1C565C0E000DDF58 /* TalkToSelfTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DE265DFB1C565C0E000DDF58 /* TalkToSelfTests.m */; };
 		DE265E071C565C0E000DDF58 /* TalkToSelfUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = DE265E061C565C0E000DDF58 /* TalkToSelfUITests.m */; };
 		DE265E201C56659B000DDF58 /* NSDate+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = DE265E1F1C56659B000DDF58 /* NSDate+Utils.m */; };
-		DE3CFC311C905C02006EC12A /* BounceView.m in Sources */ = {isa = PBXBuildFile; fileRef = DE3CFC301C905C02006EC12A /* BounceView.m */; };
-		DE3CFC341C905C18006EC12A /* PathLine.m in Sources */ = {isa = PBXBuildFile; fileRef = DE3CFC331C905C18006EC12A /* PathLine.m */; };
 		DE3CFC361C9064B5006EC12A /* kiss.png in Resources */ = {isa = PBXBuildFile; fileRef = DE3CFC351C9064B5006EC12A /* kiss.png */; };
 		DE46C2551CAA5C2E007F1EF0 /* MyPasswordRetrieveController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE46C2541CAA5C2E007F1EF0 /* MyPasswordRetrieveController.m */; };
 		DE47DFBA1CC0C9A2004147A4 /* ZYSpreadButton.m in Sources */ = {isa = PBXBuildFile; fileRef = DE47DFB71CC0C9A2004147A4 /* ZYSpreadButton.m */; };
@@ -46,9 +44,6 @@
 		DE59449A1CDB37DA007E1B53 /* targetDefault.png in Resources */ = {isa = PBXBuildFile; fileRef = DE5944981CDB37DA007E1B53 /* targetDefault.png */; };
 		DE59449B1CDB37DA007E1B53 /* userDefault.png in Resources */ = {isa = PBXBuildFile; fileRef = DE5944991CDB37DA007E1B53 /* userDefault.png */; };
 		DE5AC6661CC8B550007CB1DE /* MyBounceView.m in Sources */ = {isa = PBXBuildFile; fileRef = DE5AC6651CC8B550007CB1DE /* MyBounceView.m */; };
-		DE5AE3471C7D5720009642AF /* fafan.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DE5AE3461C7D5720009642AF /* fafan.jpg */; };
-		DE5AE3491C7D572D009642AF /* 0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DE5AE3481C7D572D009642AF /* 0.jpg */; };
-		DE5AE34B1C7D5741009642AF /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DE5AE34A1C7D5741009642AF /* 1.jpg */; };
 		DE5AE34D1C7D7AFD009642AF /* clockPanelNew.png in Resources */ = {isa = PBXBuildFile; fileRef = DE5AE34C1C7D7AFD009642AF /* clockPanelNew.png */; };
 		DE5B66401C5B3690007A7223 /* MyInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = DE5B663F1C5B3690007A7223 /* MyInputView.m */; };
 		DE6128471C817D6A00D76941 /* chat_animation1.png in Resources */ = {isa = PBXBuildFile; fileRef = DE6128371C817D6A00D76941 /* chat_animation1.png */; };
@@ -123,10 +118,6 @@
 		DE265E081C565C0E000DDF58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DE265E1E1C56659B000DDF58 /* NSDate+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Utils.h"; sourceTree = "<group>"; };
 		DE265E1F1C56659B000DDF58 /* NSDate+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Utils.m"; sourceTree = "<group>"; };
-		DE3CFC2F1C905C02006EC12A /* BounceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BounceView.h; sourceTree = "<group>"; };
-		DE3CFC301C905C02006EC12A /* BounceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BounceView.m; sourceTree = "<group>"; };
-		DE3CFC321C905C18006EC12A /* PathLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PathLine.h; sourceTree = "<group>"; };
-		DE3CFC331C905C18006EC12A /* PathLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PathLine.m; sourceTree = "<group>"; };
 		DE3CFC351C9064B5006EC12A /* kiss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kiss.png; sourceTree = "<group>"; };
 		DE46C2531CAA5C2E007F1EF0 /* MyPasswordRetrieveController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPasswordRetrieveController.h; sourceTree = "<group>"; };
 		DE46C2541CAA5C2E007F1EF0 /* MyPasswordRetrieveController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPasswordRetrieveController.m; sourceTree = "<group>"; };
@@ -180,9 +171,6 @@
 		DE5944991CDB37DA007E1B53 /* userDefault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = userDefault.png; sourceTree = "<group>"; };
 		DE5AC6641CC8B550007CB1DE /* MyBounceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyBounceView.h; sourceTree = "<group>"; };
 		DE5AC6651CC8B550007CB1DE /* MyBounceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyBounceView.m; sourceTree = "<group>"; };
-		DE5AE3461C7D5720009642AF /* fafan.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = fafan.jpg; sourceTree = "<group>"; };
-		DE5AE3481C7D572D009642AF /* 0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 0.jpg; sourceTree = "<group>"; };
-		DE5AE34A1C7D5741009642AF /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
 		DE5AE34C1C7D7AFD009642AF /* clockPanelNew.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = clockPanelNew.png; path = ../clockPanelNew.png; sourceTree = "<group>"; };
 		DE5B663E1C5B3690007A7223 /* MyInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInputView.h; sourceTree = "<group>"; };
 		DE5B663F1C5B3690007A7223 /* MyInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInputView.m; sourceTree = "<group>"; };
@@ -378,10 +366,6 @@
 			children = (
 				DE5AC6641CC8B550007CB1DE /* MyBounceView.h */,
 				DE5AC6651CC8B550007CB1DE /* MyBounceView.m */,
-				DE3CFC321C905C18006EC12A /* PathLine.h */,
-				DE3CFC331C905C18006EC12A /* PathLine.m */,
-				DE3CFC2F1C905C02006EC12A /* BounceView.h */,
-				DE3CFC301C905C02006EC12A /* BounceView.m */,
 				DE7AE9FB1CC74EA400B58665 /* MyNumSlider.h */,
 				DE7AE9FC1CC74EA400B58665 /* MyNumSlider.m */,
 			);
@@ -494,9 +478,6 @@
 				DE59447F1CDB2909007E1B53 /* thumbnails */,
 				DE47DFBC1CC0C9F5004147A4 /* spreadButton */,
 				DE6128361C817D6A00D76941 /* pic */,
-				DE5AE34A1C7D5741009642AF /* 1.jpg */,
-				DE5AE3481C7D572D009642AF /* 0.jpg */,
-				DE5AE3461C7D5720009642AF /* fafan.jpg */,
 			);
 			name = photo;
 			sourceTree = "<group>";
@@ -671,7 +652,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				DE645FE71CE0CBDE00FD3262 /* Main.storyboard in Resources */,
-				DE5AE3471C7D5720009642AF /* fafan.jpg in Resources */,
 				DE5AE34D1C7D7AFD009642AF /* clockPanelNew.png in Resources */,
 				DE265DF11C565C0E000DDF58 /* LaunchScreen.storyboard in Resources */,
 				DE6128511C817D6A00D76941 /* Chat_take_picture.png in Resources */,
@@ -695,8 +675,6 @@
 				DE9409DD1CDAE386003366BC /* btn2.png in Resources */,
 				DE9409DF1CDAE386003366BC /* btn4.png in Resources */,
 				DE59449B1CDB37DA007E1B53 /* userDefault.png in Resources */,
-				DE5AE34B1C7D5741009642AF /* 1.jpg in Resources */,
-				DE5AE3491C7D572D009642AF /* 0.jpg in Resources */,
 				DE528E561C8037370016198C /* MyViewController.xib in Resources */,
 				DE59449A1CDB37DA007E1B53 /* targetDefault.png in Resources */,
 				DE6128531C817D6A00D76941 /* chatfrom_bg_normal.png in Resources */,
@@ -739,11 +717,9 @@
 				DE5AC6661CC8B550007CB1DE /* MyBounceView.m in Sources */,
 				DE49C8C81CABA0910025FFCA /* MyTargetEditorController.m in Sources */,
 				DE4F96C21C895B8700C6C640 /* FMDatabaseQueue.m in Sources */,
-				DE3CFC341C905C18006EC12A /* PathLine.m in Sources */,
 				DE4F96BF1C895B8700C6C640 /* FMDatabase.m in Sources */,
 				DECFF1E61CA977F30052EED1 /* MyPassworeSettingController.m in Sources */,
 				DE4F96C01C895B8700C6C640 /* FMDatabaseAdditions.m in Sources */,
-				DE3CFC311C905C02006EC12A /* BounceView.m in Sources */,
 				DE77ADE01CA3BF9800283660 /* MySecretManager.m in Sources */,
 				DE4D15441C5897F700388DA7 /* MyAVAudioPlayer.m in Sources */,
 				DEC1A9F31CA4E0230062B6AD /* touchView.m in Sources */,

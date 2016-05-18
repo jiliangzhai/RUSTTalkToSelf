@@ -273,6 +273,11 @@
 {
     [self.delegate deleteCell:self];
 }
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 @end
 
 

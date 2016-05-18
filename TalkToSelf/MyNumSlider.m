@@ -43,7 +43,6 @@
 
 - (void)slideToNum:(NSUInteger)num
 {
-    //self.scrollView.contentOffset = CGPointMake(0, num*CGRectGetHeight(self.bounds));
     [self.scrollView scrollRectToVisible:CGRectMake(0, num*CGRectGetHeight(self.bounds), CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds)) animated:YES];
 }
 

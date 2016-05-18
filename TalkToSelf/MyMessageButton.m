@@ -94,27 +94,4 @@
     [self.voicePic stopAnimating];
 }
 
-#pragma copy function
-
-/*- (BOOL)canBecomeFirstResponder
- {
- return YES;
- }
- 
- - (BOOL)canPerformAction:(SEL)action withSender:(id)sender
- {
- return (action == @selector(copyText:) || (action == @selector(deleteMessage:)));
- }
- 
- - (void)copyText:(id)sender
- {
- UIPasteboard *pateBoard = [UIPasteboard generalPasteboard];
- pateBoard.string = self.titleLabel.text;
- }
- 
- - (void)deleteMessage:(id)sender
- {
- 
- }*/
-
 @end

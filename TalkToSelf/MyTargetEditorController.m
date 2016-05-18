@@ -141,6 +141,11 @@
         [MyDataSourcemanager removeAllMessageAtIndex:[MyUserManager lastTargetIndex]];
     }
 }
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 @end
 
 
