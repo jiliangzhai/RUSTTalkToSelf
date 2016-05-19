@@ -19,9 +19,11 @@
 {
     //图片消息获取
     NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-    path = [path stringByAppendingPathComponent:[NSString stringWithFormat:@"images/%@",name]];
+    NSInteger index = [MyUserManager lastTargetIndex];
+    path = [path stringByAppendingPathComponent:[NSString stringWithFormat:@"images%li/%@",(long)index,name]];
     
-    return [UIImage imageWithData:[NSData dataWithContentsOfFile:path]];
+    
+    return [UIImage imageWithContentsOfFile:path];
 }
 
 - (NSString*)storeTheImage
@@ -30,16 +32,20 @@
     NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     NSUUID *uuid = [[NSUUID alloc] init];
     NSString *key = [uuid UUIDString];
-    path = [path stringByAppendingPathComponent:@"images"];
+    path = [path stringByAppendingPathComponent:[NSString stringWithFormat:@"images%li",(long)(long)[MyUserManager lastTargetIndex]]];
     BOOL hasDir;
     [[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:&hasDir];
     if (!hasDir) {
         [[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:NO attributes:nil error:NULL];
     }
-    path = [path stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png",key]];
-    [UIImagePNGRepresentation(self) writeToFile:path atomically:YES];
+    path = [path stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.jpg",key]];
+    __weak UIImage *weakSelf = self;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSData *data = UIImageJPEGRepresentation(weakSelf, 1.0);
+        [data writeToFile:path atomically:YES];
+    });
+    return [NSString stringWithFormat:@"%@.jpg",key];
     
-    return [NSString stringWithFormat:@"%@.png",key];
 }
 
 @end
@@ -50,7 +56,7 @@
 {
     //语音消息获取
     NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-    path = [path stringByAppendingPathComponent:[NSString stringWithFormat:@"voices/%@",name]];
+    path = [path stringByAppendingPathComponent:[NSString stringWithFormat:@"voices%li/%@",(long)(long)[MyUserManager lastTargetIndex],name]];
     
     return [NSData dataWithContentsOfFile:path];
 }
@@ -61,15 +67,17 @@
     NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     NSUUID *uuid = [[NSUUID alloc] init];
     NSString *key = [uuid UUIDString];
-    path = [path stringByAppendingPathComponent:@"voices"];
+    path = [path stringByAppendingPathComponent:[NSString stringWithFormat:@"voices%li",(long)(long)[MyUserManager lastTargetIndex]]];
     BOOL hasDir;
     [[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:&hasDir];
     if (!hasDir) {
         [[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:NO attributes:nil error:NULL];
     }
     path = [path stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mp3",key]];
-    [self writeToFile:path atomically:YES];
-    
+    __weak NSData *weakself = self;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [weakself writeToFile:path atomically:YES];
+    });
     return [NSString stringWithFormat:@"%@.mp3",key];
 }
 
@@ -146,7 +154,7 @@
         }
     }else
        [MyDataSourcemanager sharedManager].dataSource = [NSMutableArray array];
-    [MyDataSourcemanager sharedManager].dataSource = [[MyDataSourcemanager sharedManager] loadMoreMessageAtIndex:index totalCount:num];
+    [[MyDataSourcemanager sharedManager] loadMoreMessageAtIndex:index totalCount:num];
     return;//初次加载
 }
 
@@ -156,7 +164,7 @@
     if (![MyDataSourcemanager sharedManager].dataSource) {
         [MyDataSourcemanager sharedManager].dataSource = [NSMutableArray array];
     }
-    [MyDataSourcemanager sharedManager].dataSource = [[MyDataSourcemanager sharedManager] loadMoreMessageAtIndex:index totalCount:num];
+    [[MyDataSourcemanager sharedManager] loadMoreMessageAtIndex:index totalCount:num];
 }
 
 + (void)addMessage:(MyMessage *)message index:(NSInteger)index
@@ -429,6 +437,28 @@
         }
         [db close];
     }
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+        path = [path stringByAppendingPathComponent:[NSString stringWithFormat:@"images%li",(long)index]];
+        if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
+            NSError *error;
+            [[NSFileManager defaultManager] removeItemAtPath:path error:&error];
+            if (error) {
+                NSLog(@"%@",error);
+            }
+        }
+        
+        NSString *path2 = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+        path2 = [path stringByAppendingPathComponent:[NSString stringWithFormat:@"voices%li",(long)index]];
+        if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
+            NSError *error;
+            [[NSFileManager defaultManager] removeItemAtPath:path error:&error];
+            if (error) {
+                NSLog(@"%@",error);
+            }
+        }
+    });
 }
 
 - (void)deleteMessage:(MyMessage *)message index:(NSInteger)index
@@ -444,13 +474,34 @@
         }
         [db close];
     }
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        if (message.messageType == 0) {
+            return;
+        }else
+        {
+            NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+            NSError *error;
+            if (message.messageType == 1) {
+                path = [path stringByAppendingPathComponent:[NSString stringWithFormat:@"images%li/%@",(long)index,message.picMessage]];
+            }else
+            {
+                path = [path stringByAppendingPathComponent:[NSString stringWithFormat:@"voices%li/%@",(long)index,message.voiceMessage]];
+            }
+            if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
+                [[NSFileManager defaultManager] removeItemAtPath:path error:&error];
+                if (error) {
+                    NSLog(@"%@",error);
+                }
+            }
+        }
+    });
 }
 
-- (NSMutableArray *)loadMoreMessageAtIndex:(NSInteger)index totalCount:(NSInteger)count
+- (void)loadMoreMessageAtIndex:(NSInteger)index totalCount:(NSInteger)count
 {
     //加载某对象的特定数量的消息
-    NSMutableArray *array = [NSMutableArray array];
-   
+    [self.dataSource removeAllObjects];
     if ([db open]) {
         NSString* sql = [NSString stringWithFormat:@"select * from (select * from target%li order by id desc limit %li) order by id asc",(long)index,(long)count];
         FMResultSet *result = [db executeQuery:sql];
@@ -466,12 +517,11 @@
             [message completeTheMessage];
             
             MyCellFrame *frame = [[MyCellFrame alloc] initWithMessage:message];
-            [array addObject:frame];
+            [self.dataSource addObject:frame];
         }
         [db close];
     }else
         NSLog(@"error when open db");
-    return array;
 }
 
 - (void)modifyTheTimeLabelTo:(BOOL)showTimeLabel message:(MyMessage *)message index:(NSInteger)index
@@ -479,7 +529,7 @@
     //更改时间标签显示属性
     if ([db open]) {
         NSString *sql = [NSString stringWithFormat:@"update target%li set showTimeLabel = ? where createdTime = ?",(long)index];
-        [db executeUpdate:sql,showTimeLabel,message.createdTime];
+        [db executeUpdate:sql,(showTimeLabel? @1:@0),message.createdTime];
         [db close];
     }else
         NSLog(@"error when open db");
@@ -534,7 +584,6 @@
 
 - (BOOL)timeOffsetBetweenStartDate:(NSString *)startDateStr toEndStr:(NSString *)endDateStr
 {
-    //
     if (!startDateStr) {
         return YES;
     }

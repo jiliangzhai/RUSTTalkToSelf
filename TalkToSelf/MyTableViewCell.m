@@ -63,6 +63,8 @@
         [self.contentView addSubview:_contentButton];
         [self.contentView addSubview:_userName];
         
+        self.backgroundColor = [UIColor colorWithRed:255/255.0 green:248/255.0 blue:220/255.0 alpha:0.8];
+        
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deviceProximityDidChange:) name:UIDeviceProximityStateDidChangeNotification object:nil];
     }
     voiceIsPlaying = NO;
@@ -215,9 +217,6 @@
 {
     NSString *subString = [createdTime substringWithRange:NSMakeRange(0, 19)];
     NSDate *lastDate = [NSDate dateFromString:subString withFormat:@"yyyy-MM-dd HH:mm:ss"];
-    //NSTimeZone *zone = [NSTimeZone systemTimeZone];
-    //NSInteger interval = [zone secondsFromGMTForDate:lastDate];
-    //lastDate = [lastDate dateByAddingTimeInterval:interval];
     
     NSString *dateStr;
     NSString *period;
@@ -272,6 +271,9 @@
 - (void)deleteMessage:(id)sender
 {
     [self.delegate deleteCell:self];
+    if (self.cellFrame.message.messageType == 2) {
+        [self playerDidFinishPlay];
+    }
 }
 
 - (void)dealloc

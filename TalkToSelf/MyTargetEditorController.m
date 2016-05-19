@@ -139,6 +139,8 @@
 {
     if (buttonIndex == 1) {
         [MyDataSourcemanager removeAllMessageAtIndex:[MyUserManager lastTargetIndex]];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfoDidChange" object:nil];
+        [self userInfoDidChanged];
     }
 }
 

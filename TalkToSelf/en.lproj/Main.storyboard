@@ -338,7 +338,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AcQ-g9-7rP">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="35.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                                     <color key="backgroundColor" red="0.40245934370000003" green="1" blue="0.3052265025" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <state key="normal" title="保存设置">
@@ -357,7 +357,7 @@
                                                 <constraint firstItem="AcQ-g9-7rP" firstAttribute="top" secondItem="9bm-Uc-TYZ" secondAttribute="topMargin" constant="-8" id="6fM-hn-T7X"/>
                                                 <constraint firstItem="AcQ-g9-7rP" firstAttribute="leading" secondItem="9bm-Uc-TYZ" secondAttribute="leadingMargin" constant="-8" id="OJl-Dv-onI"/>
                                                 <constraint firstItem="AcQ-g9-7rP" firstAttribute="trailing" secondItem="9bm-Uc-TYZ" secondAttribute="trailingMargin" constant="8" id="URc-rr-172"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="AcQ-g9-7rP" secondAttribute="bottom" id="cpp-Mj-1ob"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="AcQ-g9-7rP" secondAttribute="bottom" constant="-8" id="cpp-Mj-1ob"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -483,7 +483,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pqp-57-3Qc">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="36"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                                     <color key="backgroundColor" red="0.40245934370000003" green="1" blue="0.3052265025" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <state key="normal" title="下一步">
@@ -498,7 +498,7 @@
                                                 <constraint firstItem="pqp-57-3Qc" firstAttribute="trailing" secondItem="lvQ-Wz-m88" secondAttribute="trailingMargin" constant="8" id="6P6-x5-169"/>
                                                 <constraint firstItem="pqp-57-3Qc" firstAttribute="leading" secondItem="lvQ-Wz-m88" secondAttribute="leadingMargin" constant="-8" id="FmI-jC-XQW"/>
                                                 <constraint firstItem="pqp-57-3Qc" firstAttribute="top" secondItem="lvQ-Wz-m88" secondAttribute="topMargin" constant="-8" id="KAB-xK-O0u"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="pqp-57-3Qc" secondAttribute="bottom" id="pl8-X5-LgO"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="pqp-57-3Qc" secondAttribute="bottom" constant="-8" id="pl8-X5-LgO"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -1352,7 +1352,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jmX-zf-SFD">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="36"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                                     <color key="backgroundColor" red="0.40245934370000003" green="1" blue="0.3052265025" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <state key="normal" title="下一步">
@@ -1367,7 +1367,7 @@
                                                 <constraint firstItem="jmX-zf-SFD" firstAttribute="leading" secondItem="dgQ-Me-Fnp" secondAttribute="leadingMargin" constant="-8" id="XUg-gw-pwT"/>
                                                 <constraint firstItem="jmX-zf-SFD" firstAttribute="trailing" secondItem="dgQ-Me-Fnp" secondAttribute="trailingMargin" constant="8" id="erF-tP-aDX"/>
                                                 <constraint firstItem="jmX-zf-SFD" firstAttribute="top" secondItem="dgQ-Me-Fnp" secondAttribute="topMargin" constant="-8" id="xvs-cY-fqS"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="jmX-zf-SFD" secondAttribute="bottom" id="z59-xX-UfN"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="jmX-zf-SFD" secondAttribute="bottom" constant="-8" id="z59-xX-UfN"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>

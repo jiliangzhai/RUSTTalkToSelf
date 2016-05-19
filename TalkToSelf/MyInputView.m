@@ -77,12 +77,6 @@
         _textInputView.delegate = self;
         [self addSubview:_textInputView];
         
-        /*_messageHoldLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, CGRectGetWidth(_textInputView.frame)-40, 30)];
-        _messageHoldLabel.textColor = [UIColor lightGrayColor];
-        _messageHoldLabel.textAlignment = NSTextAlignmentCenter;
-        _messageHoldLabel.text = @"input here";
-        [_textInputView addSubview:_messageHoldLabel];*/
-        
         self.layer.borderWidth = 1.0;
         self.layer.borderColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.3].CGColor;
         
@@ -275,7 +269,7 @@
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]&&self.superController) {
         UIImagePickerController *picker = [[UIImagePickerController alloc] init];
         picker.delegate = self;
-        picker.allowsEditing = YES;
+        picker.allowsEditing = NO;
         picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         [self.superController presentViewController:picker animated:YES completion:nil];
     }
@@ -283,7 +277,11 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
-    UIImage* image = [info objectForKey:UIImagePickerControllerEditedImage];
+    UIImage* image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    UIImage *smallImage = [self resizeTheImage:image];
+    if (smallImage) {
+        image = smallImage;
+    }
     [self.superController dismissViewControllerAnimated:YES completion:^{
         [self.delegate sendPicMessage:image];
     }];
@@ -322,6 +320,22 @@
     }
 }
 
+- (UIImage *)resizeTheImage:(UIImage *)image
+{
+    CGSize original = image.size;
+    UIImage *newImage = nil;
+    if (original.width > 880) {
+        CGFloat ratio = 880/original.width;
+        CGFloat height = ratio*original.height;
+        
+        UIGraphicsBeginImageContext(CGSizeMake(880, height));
+        [image drawInRect:CGRectMake(0, 0, 880, height)];
+        
+        newImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+    }
+    return newImage;
+}
 @end
 
 

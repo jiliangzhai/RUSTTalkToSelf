@@ -58,6 +58,7 @@
     //确定要加载的消息
     [self prepareLoadDataAtIndex:currentIndex];
     [self.MyTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    self.MyTableView.backgroundColor = [UIColor colorWithRed:255/255.0 green:248/255.0 blue:220/255.0 alpha:1.0];
     
     //添加tap以关闭键盘
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];

@@ -17,7 +17,6 @@
     CGFloat screenW = CGRectGetWidth([UIScreen mainScreen].bounds);
     
     if (message.showTimeLabel) {
-        //CGSize charactersSize = [message.createdTime sizeWithFont:[UIFont systemFontOfSize:11] constrainedToSize:CGSizeMake(300, 100) lineBreakMode:NSLineBreakByWordWrapping];
         CGSize charactersSize = [self textHeight:message.createdTime size:CGSizeMake(300, 100) fontSize:11];
         CGFloat timeWidth = charactersSize.width+10;
         CGFloat timeHeight = charactersSize.height+10;

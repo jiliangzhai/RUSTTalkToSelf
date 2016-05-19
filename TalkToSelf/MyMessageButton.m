@@ -50,6 +50,7 @@
         
         [self addSubview:self.picImageView];
         [self addSubview:self.voiceView];
+        
     }
     return self;
 }
