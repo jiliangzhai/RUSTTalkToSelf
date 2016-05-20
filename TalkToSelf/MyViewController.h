@@ -10,4 +10,6 @@
 
 @interface MyViewController : UIViewController
 
+@property (nonatomic)BOOL needRefresh;
+
 @end

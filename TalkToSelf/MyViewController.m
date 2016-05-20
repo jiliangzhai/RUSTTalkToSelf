@@ -30,7 +30,6 @@
     NSInteger currentIndex;
     CGPoint currentLocation;
     MessageOriation MyOriation;
-    BOOL needRefresh;
 }
 @property (weak, nonatomic) IBOutlet UITableView *MyTableView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomConstraint;
@@ -51,7 +50,7 @@
     //变量初始值
     currentIndex = [MyUserManager lastTargetIndex];
     MyOriation = isFormSelf;
-    needRefresh = NO;
+    self.needRefresh = NO;
     [MyDataSourcemanager sharedManager].delegate = self;
     //inputView和spreadButton
     [self layoutUI];
@@ -68,11 +67,12 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
+    currentIndex = [MyUserManager lastTargetIndex];
     //当视图出现或重新出现时判断是否需要刷新操作
-    if ((currentIndex != [MyUserManager lastTargetIndex]) | needRefresh) {
+    if (self.needRefresh) {
         currentIndex = [MyUserManager lastTargetIndex];
         totalNum = [MyDataSourcemanager numOfMessageAtindex:currentIndex];
+        self.needRefresh = NO;
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             [MyDataSourcemanager reloadMessageNum:MIN(totalNum, 5) index:currentIndex];
@@ -98,8 +98,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardChanged:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardChanged:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tableViewScrollToBottom) name:UIKeyboardDidShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setNeedRefresh) name:@"userInfoDidChange" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setNeedRefresh) name:@"newTargetCreated" object:nil];
+    
     [self tableViewScrollToBottom];
 }
 
@@ -375,13 +374,6 @@
     NSIndexPath *path = [NSIndexPath indexPathForRow:[MyDataSourcemanager dataSources].count-1 inSection:0];
     [self.MyTableView insertRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationRight];
     [self tableViewScrollToBottom];
-}
-
-#pragma need refresh
-- (void)setNeedRefresh
-{
-    //视图重新出现时，需要更新数据
-    needRefresh  = YES;
 }
 
 #pragma add One Hello Message

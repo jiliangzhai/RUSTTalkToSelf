@@ -13,6 +13,7 @@
 #import "MyRegisterController.h"
 #import "MyCollectionViewCell.h"
 #import "MyCollectionViewLayout.h"
+#import "MyViewController.h"
 
 @interface MyTargetEditorController ()<UICollectionViewDataSource, UICollectionViewDelegate,UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *targetThumbnail;
@@ -34,11 +35,16 @@
     [super viewDidLoad];
     
     [UIApplication sharedApplication].statusBarHidden = YES;
-    _targetThumbnail.image = [UIImage imageWithData:[MyUserManager targetThumbnailAtIndex:[MyUserManager lastTargetIndex]]];
+    _targetThumbnail.contentMode = UIViewContentModeScaleAspectFill;
     _targetThumbnail.layer.cornerRadius = 5.0;
     _targetThumbnail.layer.masksToBounds = YES;
-    _targetName.text = [MyUserManager targetNameAtIndex:[MyUserManager lastTargetIndex]];
-    _messageNum.text = [NSString stringWithFormat:@"%li",(long)[MyDataSourcemanager numOfMessageAtindex:[MyUserManager lastTargetIndex]]];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self userInfoDidChanged];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -50,7 +56,6 @@
     //对象信息编辑
     MyUserNameAndThumbnailEditor *editor = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"UserNameAndThumbnail"];
     editor.isTarget = YES;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userInfoDidChanged) name:@"userInfoDidChanged" object:nil];
     [self.navigationController pushViewController:editor animated:YES];
 }
 
@@ -122,6 +127,8 @@
         self.targetThumbnail.image = [UIImage imageWithData:[MyUserManager targetThumbnailAtIndex:[MyUserManager lastTargetIndex]]];
         self.targetName.text = [MyUserManager targetNameAtIndex:[MyUserManager lastTargetIndex]];
         _messageNum.text = [NSString stringWithFormat:@"%li",(long)[MyDataSourcemanager numOfMessageAtindex:[MyUserManager lastTargetIndex]]];
+        MyViewController *vc = self.navigationController.viewControllers.firstObject;
+        vc.needRefresh = YES;
     }
     
     CGFloat ratioX = 20/CGRectGetWidth([UIScreen mainScreen].bounds);
@@ -139,8 +146,9 @@
 {
     if (buttonIndex == 1) {
         [MyDataSourcemanager removeAllMessageAtIndex:[MyUserManager lastTargetIndex]];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfoDidChange" object:nil];
         [self userInfoDidChanged];
+        MyViewController *vc = self.navigationController.viewControllers.firstObject;
+        vc.needRefresh = YES; 
     }
 }
 

@@ -26,28 +26,26 @@
 
 @implementation MyUserInformationEditor//静态表就不用实现协议那些了，否则会影响视图显示。
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    self.navigationController.navigationBarHidden = NO;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     //添加需要显示的信息
     [UIApplication sharedApplication].statusBarHidden = YES;
-    _userName.text = [MyUserManager userName];
-    long messageCount = [MyUserManager activeDays];
-    _messageCount.text = [NSString stringWithFormat:@"%li",messageCount];
-    _userThumbnail.image = [UIImage imageWithData:[MyUserManager userThumbnail]];
+    _userThumbnail.contentMode = UIViewContentModeScaleAspectFill;
     _userThumbnail.layer.cornerRadius = 5.0;
     _userThumbnail.layer.masksToBounds = YES;
     _userThumbnail.contentMode = UIViewContentModeScaleToFill;
     
     NSString *str = [MyUserManager willShowSystemmessage]? @"关闭系统对话":@"开启系统对话";
     [_closeSystemMsgBtn setTitle:str forState:UIControlStateNormal];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = NO;
     
+    [self userInfoDidChanged];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -82,7 +80,6 @@
     UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
     MyUserNameAndThumbnailEditor *editor = [story instantiateViewControllerWithIdentifier:@"UserNameAndThumbnail"];
     editor.isTarget = NO;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userInfoDidChanged) name:@"userInfoDidChanged" object:nil];
     [self.navigationController pushViewController:editor animated:YES];
 }
 
@@ -97,15 +94,13 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             _userName.text = str;
             _userThumbnail.image = image;
+            long activeDays = [MyUserManager activeDays];
+            _messageCount.text = [NSString stringWithFormat:@"%li",activeDays];
         });
     });
 
 }
 
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
 @end
 
 

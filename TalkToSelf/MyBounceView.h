@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#define BallRadius 30.0f
+#define BallRadius 40.0f
 
 
 @interface MyBounceView : UIView

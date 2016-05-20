@@ -8,6 +8,8 @@
 
 #import "MyUserNameAndThumbnailEditor.h"
 #import "MyUserManager.h"
+#import "MyViewController.h"
+#import "MyUserInformationEditor.h"
 
 @interface MyUserNameAndThumbnailEditor ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate>
 {
@@ -80,9 +82,13 @@
     }
     if (changed) {
         [MyUserManager save];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfoDidChanged" object:nil];
+        NSArray *array = self.navigationController.viewControllers;
+        MyUserInformationEditor *ed = (MyUserInformationEditor *)array[array.count-2];
+        [ed userInfoDidChanged];
+        MyViewController *vc = (MyViewController *)self.navigationController.viewControllers.firstObject;
+        vc.needRefresh = YES;
     }
-    [self.navigationController popViewControllerAnimated:YES];
+   [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)tap:(UITapGestureRecognizer *)tap

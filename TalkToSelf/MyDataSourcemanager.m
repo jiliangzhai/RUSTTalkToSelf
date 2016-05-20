@@ -289,7 +289,6 @@
     
     NSFileManager *manager = [NSFileManager defaultManager];
     if ([manager fileExistsAtPath:path] == NO) {
-        NSLog(@"create new table");
         db = [FMDatabase databaseWithPath:path];
         if ([db open]) {
             NSString *sql = @"create table 'target0' ('id' INTEGER PRIMARY KEY AUTOINCREMENT  NOT NULL, 'createdTime' TEXT, 'messageType' INTEGER, 'messageOriation' INTEGER, 'messageBody' TEXT, 'showTimeLabel' INTEGER, 'voiceDuration' INTEGER)";
@@ -318,6 +317,7 @@
         while ([res next]) {
             count++;
         }
+        [db close];
         return count;
     }else
     {
@@ -336,6 +336,7 @@
         while ([res next]) {
             count++;
         }
+        [db close];
         return count;
     }else
     {
@@ -354,6 +355,7 @@
         while ([res next]) {
             count++;
         }
+        [db close];
         return count;
     }else
     {
@@ -372,6 +374,7 @@
         while ([res next]) {
             count++;
         }
+        [db close];
         return count;
     }else
     {
@@ -596,7 +599,7 @@
     
     NSTimeInterval timeInterval = [startDate timeIntervalSinceDate:endDate];
     
-    if (fabs (timeInterval) > 3000) {
+    if (fabs (timeInterval) > 300) {
         return YES;
     }else{
         return NO;

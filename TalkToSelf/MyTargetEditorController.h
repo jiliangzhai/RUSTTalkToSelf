@@ -10,4 +10,6 @@
 
 @interface MyTargetEditorController : UITableViewController
 
+- (void)userInfoDidChanged;
+
 @end

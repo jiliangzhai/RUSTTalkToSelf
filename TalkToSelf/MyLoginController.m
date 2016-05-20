@@ -38,13 +38,9 @@
     
     _registerButton.layer.cornerRadius = 10.0;
     _registerButton.layer.masksToBounds = YES;
-    //_registerButton.layer.borderWidth = 2.0;
-    //_registerButton.layer.borderColor = [UIColor lightGrayColor].CGColor;
     
     _forgetButton.layer.cornerRadius = 10.0;
     _forgetButton.layer.masksToBounds = YES;
-    //_forgetButton.layer.borderWidth = 2.0;
-    //_forgetButton.layer.borderColor = [UIColor lightGrayColor].CGColor;
     
     _loginButton.layer.cornerRadius = 10.0;
     _loginButton.layer.masksToBounds = YES;

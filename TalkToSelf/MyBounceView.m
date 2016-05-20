@@ -178,7 +178,7 @@
                     self.push.pushDirection = CGVectorMake(transition.x, transition.y);
                     self.push.active = YES;
                     NSUInteger ratio = vt/2000;
-                    self.push.magnitude = 3.5*ratio;
+                    self.push.magnitude = 6*ratio;
                     [self.animator addBehavior:self.push];
                 }
                 if (!self.collosition) {

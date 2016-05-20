@@ -11,6 +11,8 @@
 #import "MyUserManager.h"
 #import "MyDataSourcemanager.h"
 #import "MyInitTargetEditorController.h"
+#import "MyViewController.h"
+#import "MyTargetEditorController.h"
 
 @interface MyRegisterController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 {
@@ -42,11 +44,13 @@
     if (_isTarget) {
         [_selectThumbnail setTitle:@"点击选择对象头像" forState:UIControlStateNormal];
         _nickNameLabel.text = @"对象昵称 :";
-        thumbnail = [UIImage imageWithData:[MyUserManager targetThumbnailAtIndex:[MyUserManager lastTargetIndex]]];
+        //thumbnail = [UIImage imageWithData:[MyUserManager targetThumbnailAtIndex:[MyUserManager lastTargetIndex]]];
+        thumbnail = [UIImage imageNamed:@"targetDefault.png"];
         [_nestStep setTitle:@"保存信息" forState:UIControlStateNormal];
     }else
     {
-        thumbnail = [UIImage imageWithData:[MyUserManager userThumbnail]];
+        //thumbnail = [UIImage imageWithData:[MyUserManager userThumbnail]];
+        thumbnail = [UIImage imageNamed:@"userDefault.png"];
         [_nestStep setTitle:@"下一步" forState:UIControlStateNormal];
     }
     _imageView.image = thumbnail;
@@ -78,7 +82,7 @@
     
     if (_isTarget) {
         if (![userName isEqualToString:@""]) {
-            [MyUserManager addTargetName:userName thumbnail:self.imageView.image];
+            [MyUserManager addTargetName:userName thumbnail:thumbnail];
         }else
         {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"创建失败" message:@"请输入对象昵称"delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
@@ -103,7 +107,8 @@
     if (_isTarget) {
         NSInteger currentIndex = [MyUserManager lastTargetIndex];
         [MyDataSourcemanager creatNewTableAtIndex:currentIndex];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"newTargetCreated" object:nil];
+        MyViewController *vc = (MyViewController *)self.navigationController.viewControllers.firstObject;
+        vc.needRefresh = YES;
         [self.navigationController popToRootViewControllerAnimated:YES];
         return;
     }
@@ -123,7 +128,8 @@
         self.imageView.image = image;
         if (!_isTarget) {
             [MyUserManager changeThumbnailTo:image];
-        }
+        }else
+            thumbnail = image;
     }
     [self dismissViewControllerAnimated:YES completion:nil];
 }
