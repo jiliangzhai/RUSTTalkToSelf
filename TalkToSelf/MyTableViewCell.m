@@ -39,7 +39,7 @@
         thumbnailBgView = [[UIView alloc] init];
         thumbnailBgView.layer.cornerRadius = 25;
         thumbnailBgView.layer.masksToBounds = YES;
-        thumbnailBgView.backgroundColor = [UIColor grayColor];
+        thumbnailBgView.backgroundColor = [UIColor whiteColor];
         _thumbnailButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _thumbnailButton.layer.cornerRadius = 25;
         _thumbnailButton.layer.masksToBounds = YES;

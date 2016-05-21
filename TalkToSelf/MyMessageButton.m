@@ -59,7 +59,7 @@
 {
     self.isFromSelf = isFormSelf;
     if (isFormSelf){
-        self.titleLabel.textColor = [UIColor blackColor];
+        self.titleLabel.textColor = [UIColor whiteColor];
         self.contentEdgeInsets = UIEdgeInsetsMake(10, 15, 10, 25);
         self.bgImage = [UIImage imageNamed:@"chatto_bg_normal.png"];
         self.bgImage = [self.bgImage resizableImageWithCapInsets:UIEdgeInsetsMake(35, 10, 10, 22)];

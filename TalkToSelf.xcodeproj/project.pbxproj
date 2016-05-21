@@ -24,6 +24,7 @@
 		DE48FC5F1C575E1900ACFE98 /* MyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DE48FC5E1C575E1900ACFE98 /* MyTableViewCell.m */; };
 		DE49C8C81CABA0910025FFCA /* MyTargetEditorController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE49C8C71CABA0910025FFCA /* MyTargetEditorController.m */; };
 		DE4D15441C5897F700388DA7 /* MyAVAudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DE4D15431C5897F700388DA7 /* MyAVAudioPlayer.m */; };
+		DE4E018E1CF03596001D72EB /* targetDefault.png in Resources */ = {isa = PBXBuildFile; fileRef = DE4E018D1CF03596001D72EB /* targetDefault.png */; };
 		DE4F39261C92AA000064D610 /* MyUserInformationEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = DE4F39251C92AA000064D610 /* MyUserInformationEditor.m */; };
 		DE4F96B11C89325F00C6C640 /* MyUserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DE4F96B01C89325F00C6C640 /* MyUserManager.m */; };
 		DE4F96BF1C895B8700C6C640 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = DE4F96B51C895B8700C6C640 /* FMDatabase.m */; };
@@ -68,7 +69,6 @@
 		DE7D8DD81CDC7C7A003A6E0F /* MyMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = DE7D8DD71CDC7C7A003A6E0F /* MyMessage.m */; };
 		DE7D8DDB1CDC7CDE003A6E0F /* MyCellFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = DE7D8DDA1CDC7CDE003A6E0F /* MyCellFrame.m */; };
 		DE7D8DDE1CDC7DA1003A6E0F /* MyMessageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = DE7D8DDD1CDC7DA1003A6E0F /* MyMessageButton.m */; };
-		DE8B3D571CEF4DDE000E2467 /* targetDefault.png in Resources */ = {isa = PBXBuildFile; fileRef = DE8B3D561CEF4DDE000E2467 /* targetDefault.png */; };
 		DE9409DC1CDAE386003366BC /* btn1.png in Resources */ = {isa = PBXBuildFile; fileRef = DE9409D81CDAE386003366BC /* btn1.png */; };
 		DE9409DD1CDAE386003366BC /* btn2.png in Resources */ = {isa = PBXBuildFile; fileRef = DE9409D91CDAE386003366BC /* btn2.png */; };
 		DE9409DE1CDAE386003366BC /* btn3.png in Resources */ = {isa = PBXBuildFile; fileRef = DE9409DA1CDAE386003366BC /* btn3.png */; };
@@ -134,6 +134,7 @@
 		DE49C8C71CABA0910025FFCA /* MyTargetEditorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTargetEditorController.m; sourceTree = "<group>"; };
 		DE4D15421C5897F700388DA7 /* MyAVAudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAVAudioPlayer.h; sourceTree = "<group>"; };
 		DE4D15431C5897F700388DA7 /* MyAVAudioPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAVAudioPlayer.m; sourceTree = "<group>"; };
+		DE4E018D1CF03596001D72EB /* targetDefault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = targetDefault.png; sourceTree = "<group>"; };
 		DE4F39241C92AA000064D610 /* MyUserInformationEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyUserInformationEditor.h; sourceTree = "<group>"; };
 		DE4F39251C92AA000064D610 /* MyUserInformationEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyUserInformationEditor.m; sourceTree = "<group>"; };
 		DE4F96AF1C89325F00C6C640 /* MyUserManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyUserManager.h; sourceTree = "<group>"; };
@@ -204,7 +205,6 @@
 		DE7D8DDA1CDC7CDE003A6E0F /* MyCellFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCellFrame.m; sourceTree = "<group>"; };
 		DE7D8DDC1CDC7DA1003A6E0F /* MyMessageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMessageButton.h; sourceTree = "<group>"; };
 		DE7D8DDD1CDC7DA1003A6E0F /* MyMessageButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMessageButton.m; sourceTree = "<group>"; };
-		DE8B3D561CEF4DDE000E2467 /* targetDefault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = targetDefault.png; path = ../../../Downloads/targetDefault.png; sourceTree = "<group>"; };
 		DE9409D81CDAE386003366BC /* btn1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn1.png; sourceTree = "<group>"; };
 		DE9409D91CDAE386003366BC /* btn2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn2.png; sourceTree = "<group>"; };
 		DE9409DA1CDAE386003366BC /* btn3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn3.png; sourceTree = "<group>"; };
@@ -466,7 +466,7 @@
 		DE59447F1CDB2909007E1B53 /* thumbnails */ = {
 			isa = PBXGroup;
 			children = (
-				DE8B3D561CEF4DDE000E2467 /* targetDefault.png */,
+				DE4E018D1CF03596001D72EB /* targetDefault.png */,
 				DE5944991CDB37DA007E1B53 /* userDefault.png */,
 			);
 			name = thumbnails;
@@ -658,7 +658,6 @@
 				DE47DFBE1CC0CAA9004147A4 /* powerButton.png in Resources */,
 				DE3CFC361C9064B5006EC12A /* kiss.png in Resources */,
 				DE9409DE1CDAE386003366BC /* btn3.png in Resources */,
-				DE8B3D571CEF4DDE000E2467 /* targetDefault.png in Resources */,
 				DE61284D1C817D6A00D76941 /* chat_ipunt_message.png in Resources */,
 				DE6128551C817D6A00D76941 /* chatto_bg_normal.png in Resources */,
 				DE61284B1C817D6A00D76941 /* chat_animation_white2.png in Resources */,
@@ -669,6 +668,7 @@
 				DE6128501C817D6A00D76941 /* chat_send_message.png in Resources */,
 				DE6128521C817D6A00D76941 /* chat_voice_record.png in Resources */,
 				DE6128481C817D6A00D76941 /* chat_animation2.png in Resources */,
+				DE4E018E1CF03596001D72EB /* targetDefault.png in Resources */,
 				DE265DEE1C565C0E000DDF58 /* Assets.xcassets in Resources */,
 				DE6128471C817D6A00D76941 /* chat_animation1.png in Resources */,
 				DE61284E1C817D6A00D76941 /* chat_message_back.png in Resources */,
