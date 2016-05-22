@@ -18,8 +18,8 @@
         
         //计算底层图案大小
         self.backgroundColor=[UIColor clearColor];
-        radius=frame.size.width/9.5;
-        CGFloat mariginUpDown=(frame.size.height-7.5*radius)/2.0;
+        _radius=frame.size.width/9.5;
+        CGFloat mariginUpDown=(frame.size.height-7.5*_radius)/2.0;
         
         _rects=[[NSMutableArray alloc] init];
         
@@ -28,7 +28,7 @@
             int shang=i/3;
             int yu=i%3;
             
-            CGRect rect=CGRectMake(radius+yu*2.75*radius, mariginUpDown+shang*2.75*radius, 2*radius, 2*radius);
+            CGRect rect=CGRectMake(_radius+yu*2.75*_radius, mariginUpDown+shang*2.75*_radius, 2*_radius, 2*_radius);
             
             NSValue* value=[NSValue valueWithCGRect:rect];
             
@@ -37,10 +37,11 @@
     }
     
     //添加滑动视图
-    _touchView=[[touchView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
-    _touchView.radius=radius;
-    _touchView.rects=[_rects copy];
-    [self addSubview:_touchView];
+    touchView *view = [[touchView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
+    view.radius = _radius;
+    view.rects=[_rects copy];
+    self.touchView = view;
+    [self addSubview:self.touchView];
     
     return self;
 }
@@ -56,13 +57,13 @@
         NSValue* value=_rects[i];
         CGRect rect=[value CGRectValue];
         
-        [path1 moveToPoint:CGPointMake(rect.origin.x+2*radius, rect.origin.y+radius)];
+        [path1 moveToPoint:CGPointMake(rect.origin.x+2*_radius, rect.origin.y+_radius)];
         
-        [path1 addArcWithCenter:CGPointMake(rect.origin.x+radius, rect.origin.y+radius) radius:radius startAngle:0
+        [path1 addArcWithCenter:CGPointMake(rect.origin.x+_radius, rect.origin.y+_radius) radius:_radius startAngle:0
                       endAngle:M_PI*2 clockwise:YES];
         
-        [path1 moveToPoint:CGPointMake(rect.origin.x+radius+3, rect.origin.y+radius)];
-        [path1 addArcWithCenter:CGPointMake(rect.origin.x+radius, rect.origin.y+radius) radius:3 startAngle:0
+        [path1 moveToPoint:CGPointMake(rect.origin.x+_radius+3, rect.origin.y+_radius)];
+        [path1 addArcWithCenter:CGPointMake(rect.origin.x+_radius, rect.origin.y+_radius) radius:3 startAngle:0
                       endAngle:M_PI*2 clockwise:YES];
     }
     
@@ -77,8 +78,8 @@
         NSValue* value=_rects[i];
         CGRect rect=[value CGRectValue];
         
-        [path2 moveToPoint:CGPointMake(rect.origin.x+radius+3, rect.origin.y+radius)];
-        [path2 addArcWithCenter:CGPointMake(rect.origin.x+radius, rect.origin.y+radius) radius:3 startAngle:0
+        [path2 moveToPoint:CGPointMake(rect.origin.x+_radius+3, rect.origin.y+_radius)];
+        [path2 addArcWithCenter:CGPointMake(rect.origin.x+_radius, rect.origin.y+_radius) radius:3 startAngle:0
                       endAngle:M_PI*2 clockwise:YES];
     }
     

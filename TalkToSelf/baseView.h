@@ -17,13 +17,13 @@ enum operation
 };
 
 @interface baseView : UIView
-{
-    CGFloat radius;
-}
 
 @property(nonatomic,strong) NSMutableArray* rects;
 @property(nonatomic) enum operation operation;
-@property(nonatomic,strong) touchView* touchView;
+@property(nonatomic,weak) touchView* touchView;
+@property(nonatomic)CGFloat radius;
+
+
 
 
 @end

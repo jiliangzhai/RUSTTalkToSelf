@@ -452,11 +452,10 @@
             }
         }
         
-        NSString *path2 = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-        path2 = [path stringByAppendingPathComponent:[NSString stringWithFormat:@"voices%li",(long)index]];
-        if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
+        NSString *path2 = [path stringByAppendingPathComponent:[NSString stringWithFormat:@"voices%li",(long)index]];
+        if ([[NSFileManager defaultManager] fileExistsAtPath:path2]) {
             NSError *error;
-            [[NSFileManager defaultManager] removeItemAtPath:path error:&error];
+            [[NSFileManager defaultManager] removeItemAtPath:path2 error:&error];
             if (error) {
                 NSLog(@"%@",error);
             }

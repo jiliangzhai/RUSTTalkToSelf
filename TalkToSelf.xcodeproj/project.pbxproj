@@ -610,6 +610,7 @@
 				TargetAttributes = {
 					DE265DDD1C565C0E000DDF58 = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = 92T953K8M5;
 					};
 					DE265DF61C565C0E000DDF58 = {
 						CreatedOnToolsVersion = 7.2;
@@ -840,6 +841,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "4fe39526-4697-442b-8688-5c94ad67bc1b";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -876,6 +878,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "2ce8dee0-aa25-416b-9a72-665fb520b3d3";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -885,6 +888,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = YES;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = TalkToSelf/Info.plist;
@@ -894,8 +899,9 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/TalkToSelf",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = RUST.TalkToSelf;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rustblogs.talkToSelf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -903,6 +909,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = YES;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = TalkToSelf/Info.plist;
@@ -912,8 +920,9 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/TalkToSelf",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = RUST.TalkToSelf;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rustblogs.talkToSelf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

@@ -220,9 +220,7 @@
 - (void)textViewDidChange:(UITextView *)textView
 {
     //文本消息变化
-    CGSize size;
     CGRect rect = [[textView layoutManager] usedRectForTextContainer:[textView textContainer]];
-    size = rect.size;
     CGFloat height = ceilf(CGRectGetHeight(rect));
     if (height!=originalHeight) {
         [self resizeAccordingToTextViewHeightChangedBy:height];
@@ -258,7 +256,7 @@
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]&&self.superController) {
         UIImagePickerController *picker = [[UIImagePickerController alloc] init];
         picker.delegate = self;
-        picker.allowsEditing = YES;
+        picker.allowsEditing = NO;
         picker.sourceType = UIImagePickerControllerSourceTypeCamera;
         [self .superController presentViewController:picker animated:YES completion:nil];
     }
