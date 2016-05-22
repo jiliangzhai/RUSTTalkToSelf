@@ -21,6 +21,7 @@
     CGFloat padding;
     CGFloat topBottom;
     BOOL lastSendButtonState;
+    CGFloat normalHeght;
 }
 
 @end
@@ -216,6 +217,7 @@
     lastSendButtonState = YES;
     CGRect rect = [[textView layoutManager] usedRectForTextContainer:[textView textContainer]];
     originalHeight = CGRectGetHeight(rect);
+    normalHeght = originalHeight;
 }
 - (void)textViewDidChange:(UITextView *)textView
 {
@@ -238,6 +240,7 @@
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
     //文本消息结束编辑
+    [self resizeAccordingToTextViewHeightChangedBy:normalHeght];
      _messageHoldLabel.hidden = _textInputView.text.length>0;
     originalHeight = 0;
 }
