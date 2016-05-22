@@ -119,6 +119,7 @@
 		DE265E1E1C56659B000DDF58 /* NSDate+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Utils.h"; sourceTree = "<group>"; };
 		DE265E1F1C56659B000DDF58 /* NSDate+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Utils.m"; sourceTree = "<group>"; };
 		DE35B01B1CF171A1008AC9CE /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "zh-Hans"; path = "zh-Hans.lproj/Main.storyboard"; sourceTree = "<group>"; };
+		DE35B01E1CF175DC008AC9CE /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DE3CFC351C9064B5006EC12A /* kiss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kiss.png; sourceTree = "<group>"; };
 		DE46C2531CAA5C2E007F1EF0 /* MyPasswordRetrieveController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPasswordRetrieveController.h; sourceTree = "<group>"; };
 		DE46C2541CAA5C2E007F1EF0 /* MyPasswordRetrieveController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPasswordRetrieveController.m; sourceTree = "<group>"; };
@@ -784,6 +785,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				DE35B01B1CF171A1008AC9CE /* zh-Hans */,
+				DE35B01E1CF175DC008AC9CE /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
