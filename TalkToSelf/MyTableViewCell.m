@@ -66,6 +66,7 @@
         self.backgroundColor = [UIColor colorWithRed:255/255.0 green:248/255.0 blue:220/255.0 alpha:0.8];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deviceProximityDidChange:) name:UIDeviceProximityStateDidChangeNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deviceChanged:) name:AVAudioSessionRouteChangeNotification object:[AVAudioSession sharedInstance]];
     }
     voiceIsPlaying = NO;
     return self;
@@ -273,6 +274,17 @@
     [self.delegate deleteCell:self];
     if (self.cellFrame.message.messageType == 2) {
         [self playerDidFinishPlay];
+    }
+}
+
+- (void)deviceChanged:(NSNotification *)dic
+{
+    NSDictionary *info = [dic userInfo];
+    NSNumber *reason = [info objectForKey:AVAudioSessionRouteChangeReasonKey];
+    if ([reason integerValue] == AVAudioSessionRouteChangeReasonOldDeviceUnavailable) {
+        if (voiceIsPlaying == YES) {
+            [self playerDidFinishPlay];
+        }
     }
 }
 

@@ -25,7 +25,7 @@
     MyViewController *mvc = [[MyViewController alloc] init];
     ViewController *vc = [[ViewController alloc] initWithRootViewController:mvc];
     self.window.rootViewController = vc;
-    MyLoginController *login = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"MyLoginController"];
+    MyLoginController *login = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle bundleWithIdentifier:@"RUST.TalkToSelf"]] instantiateViewControllerWithIdentifier:@"MyLoginController"];
     [vc pushViewController:login animated:NO];
     
     self.window.backgroundColor = [UIColor blackColor];

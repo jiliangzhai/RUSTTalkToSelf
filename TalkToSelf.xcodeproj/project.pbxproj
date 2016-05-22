@@ -118,6 +118,7 @@
 		DE265E081C565C0E000DDF58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DE265E1E1C56659B000DDF58 /* NSDate+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Utils.h"; sourceTree = "<group>"; };
 		DE265E1F1C56659B000DDF58 /* NSDate+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Utils.m"; sourceTree = "<group>"; };
+		DE35B01B1CF171A1008AC9CE /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "zh-Hans"; path = "zh-Hans.lproj/Main.storyboard"; sourceTree = "<group>"; };
 		DE3CFC351C9064B5006EC12A /* kiss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kiss.png; sourceTree = "<group>"; };
 		DE46C2531CAA5C2E007F1EF0 /* MyPasswordRetrieveController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPasswordRetrieveController.h; sourceTree = "<group>"; };
 		DE46C2541CAA5C2E007F1EF0 /* MyPasswordRetrieveController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPasswordRetrieveController.m; sourceTree = "<group>"; };
@@ -189,7 +190,6 @@
 		DE6128451C817D6A00D76941 /* chatto_bg_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chatto_bg_normal.png; sourceTree = "<group>"; };
 		DE62162B1C856D1500DBCE2A /* MyDataSourcemanager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyDataSourcemanager.h; sourceTree = "<group>"; };
 		DE62162C1C856D1500DBCE2A /* MyDataSourcemanager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyDataSourcemanager.m; sourceTree = "<group>"; };
-		DE645FE91CE0CDCB00FD3262 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DE77ADDE1CA3BF9800283660 /* MySecretManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySecretManager.h; sourceTree = "<group>"; };
 		DE77ADDF1CA3BF9800283660 /* MySecretManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySecretManager.m; sourceTree = "<group>"; };
 		DE77ADE11CA3BFAD00283660 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -627,6 +627,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = DE265DD51C565C0E000DDF58;
 			productRefGroup = DE265DDF1C565C0E000DDF58 /* Products */;
@@ -782,7 +783,7 @@
 		DE265DEA1C565C0E000DDF58 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				DE645FE91CE0CDCB00FD3262 /* en */,
+				DE35B01B1CF171A1008AC9CE /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
