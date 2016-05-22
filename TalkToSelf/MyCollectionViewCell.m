@@ -22,6 +22,7 @@
     _imageView.layer.borderColor = [UIColor whiteColor].CGColor;
     _imageView.layer.borderWidth = 2.0;
     _imageView.layer.masksToBounds = YES;
+    _imageView.backgroundColor = [UIColor whiteColor];
 }
 
 - (void)setTheImage:(UIImage *)image
